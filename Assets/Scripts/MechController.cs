@@ -7,10 +7,12 @@ using UnityEngine;
 /// </summary>
 public class MechController : MonoBehaviour
 {
+    public float maxRange = 5;
     // the bullets and the locations on the prefab where they spawn from
     public GameObject BulletPrefab = null;
     public Transform ShootOrigin = null;
 
+    public GameObject eyes;
     // the 'scanner' that allows the ship to 'see' its surroundings
     public GameObject Lookout = null;
     public GameObject point = null;
@@ -55,7 +57,7 @@ public class MechController : MonoBehaviour
     /// Should be called only once
     /// </summary>
     public void StartBattle() {
-        Debug.Log("test");
+      //  Debug.Log("test");
         StartCoroutine(ai.RunAI());
     }
 
@@ -71,13 +73,20 @@ public class MechController : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
     void OnTriggerStay(Collider other) {
-        if (other.tag == "Mech") {
-            ScannedRobotEvent scannedRobotEvent = new ScannedRobotEvent();
-            scannedRobotEvent.Distance = Vector3.Distance(transform.position, other.transform.position);
-            scannedRobotEvent.Name = other.name;
-            ai.OnScannedRobot(scannedRobotEvent);
+
+        if (other.tag == "Mech")
+        {
+
+          //  ScannedRobotEvent scannedRobotEvent = new ScannedRobotEvent();
+          //  scannedRobotEvent.Distance = Vector3.Distance(transform.position, other.transform.position);
+          //  scannedRobotEvent.Name = other.name;
+          //  ai.OnScannedRobot(scannedRobotEvent);
+
         }
+           
     }
+      
+    
 
     public void CapturingFlag()
     {
