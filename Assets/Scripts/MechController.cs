@@ -23,7 +23,7 @@ public class MechController : MonoBehaviour
     private BaseAI ai = null;
 
     // create a level playing field. Every ship has the same basic abilities
-    private float MechSpeed = 10f;
+    private float MechSpeed = 2f;
     private float SeaSize = 25.0f;
     private float RotationSpeed = 250.0f;
 
@@ -80,7 +80,13 @@ public class MechController : MonoBehaviour
         for (int f = 0; f < numFrames; f++) {
             transform.Translate(new Vector3(0f, 0f, MechSpeed * Time.fixedDeltaTime), Space.Self);
             Vector3 clampedPosition = Vector3.Max(Vector3.Min(transform.position, new Vector3(SeaSize, 0, SeaSize)), new Vector3(-SeaSize, 0, -SeaSize));
-            transform.position = clampedPosition;
+            // transform.position = clampedPosition;
+
+            //CharacterController controller = gameObject.GetComponent<CharacterController>();
+            //controller.Move(clampedPosition);
+
+            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+            rigidbody.MovePosition(transform.position + (Vector3.forward * 3));
 
             yield return new WaitForFixedUpdate();            
         }
