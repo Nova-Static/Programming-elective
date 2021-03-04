@@ -15,6 +15,10 @@ public class MechController : MonoBehaviour
     public GameObject Lookout = null;
     public GameObject point = null;
 
+    // The flag trigger
+    private GameObject flag = null;
+    
+
     // sails can be used to indicate the state of the ship (attacking, fleeing, searching etc.)
     public GameObject[] sails = null;
 
@@ -28,10 +32,13 @@ public class MechController : MonoBehaviour
     private float SeaSize = 25.0f;
     private float RotationSpeed = 250.0f;
 
+    private FlagManager flagManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        flag = GameObject.Find("Flag");
+        flagManager = flag.GetComponent<FlagManager>();
     }
 
     /// <summary>
@@ -55,6 +62,7 @@ public class MechController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        CapturingFlag();
     }
 
     /// <summary>
@@ -71,6 +79,17 @@ public class MechController : MonoBehaviour
         }
     }
 
+    public void CapturingFlag()
+    {
+       
+        if (flagManager.name != null)
+        {
+            FlagBeingCaptured flagBeingCaptured = new FlagBeingCaptured();
+            flagBeingCaptured.Name = flagManager.name;
+            flagBeingCaptured.capturing = flagManager.robot;
+            ai.OnFlagBeingCaptured(flagBeingCaptured);
+        }
+    }
     //public void SlopeDetected()
     //{
     //    RaycastHit hit;

@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// An example AI that is a bit more elaborate than <seealso cref="PondAI"/>.
 /// </summary>
-public class IljaAI : BaseAI
+public class DarwinsAi : BaseAI
 {
     public override IEnumerator RunAI() {
         for (int i = 0; i < 10; i++)

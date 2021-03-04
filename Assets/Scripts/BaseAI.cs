@@ -15,7 +15,11 @@ public class SlopeDetectedEvent
 {
     public bool isStuck;
 }
-
+public class FlagBeingCaptured
+{
+    public string Name;
+    public bool capturing;
+}
 public class BaseAI
 {
     public MechController Mech = null;
@@ -25,6 +29,11 @@ public class BaseAI
     /// </summary>
     /// <param name="e">The event data</param>
     public virtual void OnScannedRobot(ScannedRobotEvent e)
+    {
+        // 
+    }
+
+    public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)
     {
         // 
     }

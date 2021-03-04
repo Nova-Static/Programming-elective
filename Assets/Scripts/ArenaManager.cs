@@ -24,7 +24,7 @@ public class ArenaManager : MonoBehaviour
     void Start()
     {
         BaseAI[] aiArray = new BaseAI[] {
-            new IljaAI(), 
+            new DarwinsAi(), 
             new PondAI(), 
             new PondAI(), 
             new PondAI()

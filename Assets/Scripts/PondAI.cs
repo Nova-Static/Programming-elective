@@ -6,12 +6,14 @@ using UnityEngine;
 /// </summary>
 public class PondAI : BaseAI
 {
+    bool detectedRobot;
     public override IEnumerator RunAI() {
         while (true)
         {
+            
             yield return Ahead(30);
             yield return TurnRight(180);
-            yield return FireFront(10f);
+            
         }
     }
 
@@ -20,8 +22,16 @@ public class PondAI : BaseAI
     /// </summary>
     public override void OnScannedRobot(ScannedRobotEvent e)
     {
-        Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
+        FireFront(10f);
+        detectedRobot = true;
+       // Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
     }
+    public override void OnFlagBeingCaptured(FlagBeingCaptured e)
+    {
+        //FireFront(10f);
+        //detectedRobot = true;
+    }
+
     //public override void OnSlopeDetected(SlopeDetectedEvent e)
     //{
     //    base.OnSlopeDetected(e);

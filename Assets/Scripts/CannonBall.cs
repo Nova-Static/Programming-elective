@@ -17,6 +17,6 @@ public class CannonBall : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        transform.Translate(new Vector3(0f, 0f, 500 * Time.fixedDeltaTime), Space.Self);
+        transform.Translate(new Vector3(0f, 0f, 100 * Time.fixedDeltaTime), Space.Self);
     }
 }
