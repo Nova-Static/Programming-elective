@@ -13,6 +13,7 @@ public class MechController : MonoBehaviour
 
     // the 'scanner' that allows the ship to 'see' its surroundings
     public GameObject Lookout = null;
+    public GameObject point = null;
 
     // sails can be used to indicate the state of the ship (attacking, fleeing, searching etc.)
     public GameObject[] sails = null;
@@ -69,6 +70,21 @@ public class MechController : MonoBehaviour
             ai.OnScannedRobot(scannedRobotEvent);
         }
     }
+
+    //public void SlopeDetected()
+    //{
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(point.transform.position, transform.forward, out hit, 1.0f))
+    //    {
+    //        if (Vector3.Dot(Vector3.up, hit.normal) > 0.7)
+    //        {
+    //            SlopeDetectedEvent slopeDetectedEvent = new SlopeDetectedEvent();
+    //            slopeDetectedEvent.isStuck = true;
+    //            ai.OnSlopeDetected(slopeDetectedEvent);
+    //        }
+    //    }
+    //}
+
 
     /// <summary>
     /// Move this ship ahead by the given distance

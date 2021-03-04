@@ -11,6 +11,11 @@ public class ScannedRobotEvent {
     public float Distance; 
 }
 
+public class SlopeDetectedEvent
+{
+    public bool isStuck;
+}
+
 public class BaseAI
 {
     public MechController Mech = null;
@@ -23,7 +28,11 @@ public class BaseAI
     {
         // 
     }
-
+    //public virtual void OnSlopeDetected(SlopeDetectedEvent e)
+    //{
+    //    // 
+    //    //yield return Mech.SlopeDetected();
+    //}
     /// <summary>
     /// Move this Mech ahead by the given distance
     /// </summary>
