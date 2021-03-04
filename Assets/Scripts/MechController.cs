@@ -12,14 +12,17 @@ public class MechController : MonoBehaviour
     public GameObject BulletPrefab = null;
     public Transform ShootOrigin = null;
 
-    public GameObject eyes;
+   
     // the 'scanner' that allows the ship to 'see' its surroundings
     public GameObject Lookout = null;
     public GameObject point = null;
 
     // The flag trigger
     private GameObject flag = null;
-    
+
+    public GameObject Eyes;
+    GameObject eyes2;
+    LayerMask mask;
 
     // sails can be used to indicate the state of the ship (attacking, fleeing, searching etc.)
     public GameObject[] sails = null;
@@ -41,6 +44,8 @@ public class MechController : MonoBehaviour
     {
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
+        mask = LayerMask.GetMask("Mech");
+        mask = ~mask;
     }
 
     /// <summary>
@@ -76,11 +81,22 @@ public class MechController : MonoBehaviour
 
         if (other.tag == "Mech")
         {
+            eyes2 = other.gameObject.transform.GetChild(2).gameObject;
 
-          //  ScannedRobotEvent scannedRobotEvent = new ScannedRobotEvent();
-          //  scannedRobotEvent.Distance = Vector3.Distance(transform.position, other.transform.position);
-          //  scannedRobotEvent.Name = other.name;
-          //  ai.OnScannedRobot(scannedRobotEvent);
+
+            if (Physics.Linecast(Eyes.transform.position, eyes2.transform.position, mask))
+            {
+                Debug.Log("blocked");
+            }
+            else
+            {
+                Debug.Log("Enemy");
+                ScannedRobotEvent scannedRobotEvent = new ScannedRobotEvent();
+                scannedRobotEvent.Distance = Vector3.Distance(transform.position, other.transform.position);
+                scannedRobotEvent.Name = other.name;
+                ai.OnScannedRobot(scannedRobotEvent);
+            }
+              
 
         }
            
