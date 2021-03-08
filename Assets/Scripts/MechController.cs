@@ -132,7 +132,7 @@ public class MechController : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<MechController>() != null)
+        if (other.gameObject.GetComponent<MechController>() != null||other.gameObject.tag=="flag")
         {
             eyes2 = other.gameObject.transform.GetChild(2).gameObject;
             if (Physics.Linecast(eyes.transform.position, eyes2.transform.position, mask))
