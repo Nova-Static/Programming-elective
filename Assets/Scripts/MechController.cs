@@ -25,6 +25,9 @@ public class MechController : MonoBehaviour
 
     int Health = 100;
     int Damage = 20;
+    public GameObject eyes;
+    GameObject eyes2;
+    LayerMask mask;
     // the bullets and the locations on the prefab where they spawn from
     public GameObject BulletPrefab = null;
     public Transform ShootOrigin = null;
@@ -34,6 +37,8 @@ public class MechController : MonoBehaviour
     {
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
+        mask = LayerMask.GetMask("Mech");
+        mask = ~mask;
     }
 
     void Awake()
@@ -127,18 +132,25 @@ public class MechController : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-
         if (other.gameObject.GetComponent<MechController>() != null)
         {
-            //Debug.Log($"{name} sees: {other.gameObject.GetComponent<BotController>().name}");
-            RadarBlibInfo info = new RadarBlibInfo();
-            info.visible = true;
-            info.name = other.gameObject.name;
-            info.health = other.gameObject.GetComponent<MechController>().Health;
-            info.position = other.gameObject.transform.position;
-            AI.OnRecordRadarBlib(info);
+            eyes2 = other.gameObject.transform.GetChild(2).gameObject;
+            if (Physics.Linecast(eyes.transform.position, eyes2.transform.position, mask))
+            {
+                Debug.Log("blocked");
+            }
+            else
+            {
+                Debug.Log("Shoot");
+                //Debug.Log($"{name} sees: {other.gameObject.GetComponent<BotController>().name}");
+                RadarBlibInfo info = new RadarBlibInfo();
+                info.visible = true;
+                info.name = other.gameObject.name;
+                info.health = other.gameObject.GetComponent<MechController>().Health;
+                info.position = other.gameObject.transform.position;
+                AI.OnRecordRadarBlib(info);
+            }
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
