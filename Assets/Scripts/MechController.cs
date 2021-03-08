@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cinemachine;
 
 public enum RotateDirection
 {
@@ -32,6 +33,8 @@ public class MechController : MonoBehaviour
     public GameObject BulletPrefab = null;
     public Transform ShootOrigin = null;
 
+    public CinemachineImpulseSource CISource;
+
     float timePerShot = 2f;
     void Start()
     {
@@ -39,6 +42,8 @@ public class MechController : MonoBehaviour
         flagManager = flag.GetComponent<FlagManager>();
         mask = LayerMask.GetMask("Mech");
         mask = ~mask;
+
+        CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
     }
 
     void Awake()
@@ -108,6 +113,7 @@ public class MechController : MonoBehaviour
         {
             timePerShot = 2f;
             GameObject newInstance = Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+            CISource.GenerateImpulse();
         }
     }
 
