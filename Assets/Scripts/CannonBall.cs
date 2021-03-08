@@ -6,6 +6,7 @@
 /// </summary>
 public class CannonBall : MonoBehaviour
 {
+    private float speed = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class CannonBall : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        transform.Translate(new Vector3(0f, 0f, 100 * Time.fixedDeltaTime), Space.Self);
+        speed += Time.deltaTime*20;
+        transform.Translate(new Vector3(0f, 0f, speed * Time.fixedDeltaTime), Space.Self);
     }
 }

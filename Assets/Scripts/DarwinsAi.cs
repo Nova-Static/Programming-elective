@@ -45,6 +45,6 @@ public class DarwinsAi : BaseAI
 
     public override void OnFlagBeingCaptured(FlagBeingCaptured e)
     {
-        Debug.Log(e.Name);
+
     }
 }

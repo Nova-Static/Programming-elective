@@ -7,6 +7,7 @@ TagManager:
   - Mech
   - Trigger
   - Eyes
+  - Bullet
   layers:
   - Default
   - TransparentFX

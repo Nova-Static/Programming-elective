@@ -24,12 +24,16 @@ public class MechController : MonoBehaviour
     float AngularSpeed = 10;
 
     int Health = 100;
+    int Damage = 20;
+    // the bullets and the locations on the prefab where they spawn from
+    public GameObject BulletPrefab = null;
+    public Transform ShootOrigin = null;
 
+    float timePerShot = 2f;
     void Start()
     {
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
-        
     }
 
     void Awake()
@@ -93,6 +97,15 @@ public class MechController : MonoBehaviour
         rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
     }
 
+    public void Fire()
+    {
+        if (timePerShot <= 0f)
+        {
+            timePerShot = 2f;
+            GameObject newInstance = Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+        }
+    }
+
     /// <summary>
     /// Rotates towards the indicated direction/position in space
     /// Rotation happens at the AngularSpeed as set in the inspector
@@ -114,6 +127,7 @@ public class MechController : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
+
         if (other.gameObject.GetComponent<MechController>() != null)
         {
             //Debug.Log($"{name} sees: {other.gameObject.GetComponent<BotController>().name}");
@@ -124,20 +138,38 @@ public class MechController : MonoBehaviour
             info.position = other.gameObject.transform.position;
             AI.OnRecordRadarBlib(info);
         }
+
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.other.gameObject.tag.Equals("Bullet"))
+        {
+            Health -= Damage;
+            Destroy(collision.other.gameObject);
+        }
+    }
     // Below this is stuff to make the 'architecture' work.
 
     void Update()
     {
         if (IsActive)
         {
+            if (Health <= 0)
+            {
+                Die();
+            }
+
             Accelleration.Set(0, 0, 0);
             AI.Update();
             CapturingFlag();
         }
     }
-
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
     private void FixedUpdate()
     {
         if (IsActive)
@@ -145,7 +177,10 @@ public class MechController : MonoBehaviour
             Debug.Log($"Accelleration of {name} is {Accelleration}");
 
             rigidbody.velocity += Accelleration;
-
+            if (timePerShot >= 0)
+            {
+                timePerShot -= Time.deltaTime;
+            }
             //Vector3 newDirection = Vector3.RotateTowards(transform.forward, rigidbody.velocity, 10f, 0.0f);
             //transform.rotation = Quaternion.LookRotation(newDirection);
         }

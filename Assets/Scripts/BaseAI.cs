@@ -42,7 +42,7 @@ public class BaseAI
     }
     protected void Fire()
     {
-        Debug.Log("Fire");
+        Controller.Fire();
     }
     protected void Seek(Vector3 position)
     {
