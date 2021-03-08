@@ -29,6 +29,7 @@ public class MechController : MonoBehaviour
     {
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
+        
     }
 
     void Awake()
@@ -41,7 +42,7 @@ public class MechController : MonoBehaviour
 
     public void CapturingFlag()
     {
-        Debug.Log(flagManager.name);
+        
         if (flagManager.name != null)
         {
             FlagBeingCaptured flagBeingCaptured = new FlagBeingCaptured();
@@ -133,6 +134,7 @@ public class MechController : MonoBehaviour
         {
             Accelleration.Set(0, 0, 0);
             AI.Update();
+            CapturingFlag();
         }
     }
 

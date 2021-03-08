@@ -41,8 +41,8 @@ public class PondAI : BaseAI
         }
     }
 
-    //public override void OnFlagBeingCaptured(FlagBeingCaptured e)
-    //{
-    //    Debug.Log(e.Name);
-    //}
+    public override void OnFlagBeingCaptured(FlagBeingCaptured e)
+    {
+        Debug.Log(e.Name);
+    }
 }
