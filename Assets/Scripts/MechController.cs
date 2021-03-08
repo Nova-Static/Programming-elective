@@ -163,11 +163,11 @@ public class MechController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.other.gameObject.tag.Equals("Bullet"))
+        if (collision.collider.gameObject.tag.Equals("Bullet"))
         {
             Health -= Damage;
-            Destroy(collision.other.gameObject);
-            Instantiate(ExplosionPrefab, collision.other.gameObject.transform.position, collision.other.gameObject.transform.rotation);
+            Destroy(collision.collider.gameObject);
+            Instantiate(ExplosionPrefab, collision.collider.gameObject.transform.position, collision.collider.gameObject.transform.rotation);
         }
     }
     // Below this is stuff to make the 'architecture' work.

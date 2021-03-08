@@ -18,26 +18,32 @@ public class teleporterScript : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {        
-        if (childNumber == 0)
+    {
+        if (other.gameObject.CompareTag("Mech"))
         {
-            CounterTeleporter = this.gameObject.transform.parent.GetChild(1).gameObject.transform;
-        }
-        else if (childNumber == 1)
-        {
-            CounterTeleporter = this.gameObject.transform.parent.GetChild(0).gameObject.transform;
+            if (childNumber == 0)
+            {
+                CounterTeleporter = this.gameObject.transform.parent.GetChild(1).gameObject.transform;
+            }
+            else if (childNumber == 1)
+            {
+                CounterTeleporter = this.gameObject.transform.parent.GetChild(0).gameObject.transform;
+            }
         }
     }
 
     // Update is called once per frame
     private void OnTriggerStay(Collider other)
     {
-        if (parentCooldownManager)
+        if (other.gameObject.CompareTag("Mech"))
         {
-            parentCooldownManager.teleportGotUsed = true;
-            if (parentCooldownManager.teleportCooldown == 5)
+            if (parentCooldownManager)
             {
-                other.gameObject.transform.position = CounterTeleporter.position;
+                parentCooldownManager.teleportGotUsed = true;
+                if (parentCooldownManager.teleportCooldown == 5)
+                {
+                    other.gameObject.transform.position = CounterTeleporter.position;
+                }
             }
         }
     }
