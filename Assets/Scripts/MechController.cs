@@ -31,6 +31,7 @@ public class MechController : MonoBehaviour
     LayerMask mask;
     // the bullets and the locations on the prefab where they spawn from
     public GameObject BulletPrefab = null;
+    public GameObject ExplosionPrefab = null;
     public Transform ShootOrigin = null;
 
     public CinemachineImpulseSource CISource;
@@ -166,6 +167,7 @@ public class MechController : MonoBehaviour
         {
             Health -= Damage;
             Destroy(collision.other.gameObject);
+            Instantiate(ExplosionPrefab, collision.other.gameObject.transform.position, collision.other.gameObject.transform.rotation);
         }
     }
     // Below this is stuff to make the 'architecture' work.
