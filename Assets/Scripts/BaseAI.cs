@@ -1,93 +1,76 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-/// <summary>
-/// The event data that is generated when another participant in the arena was 'seen'
-/// </summary>
-public class ScannedRobotEvent {
-    public string Name;
-    public float Distance; 
-}
-
-public class SlopeDetectedEvent
+public class RadarBlibInfo
 {
-    public bool isStuck;
+    public bool visible = true;
+    public string name;
+    public int health;
+    public Vector3 position;
 }
 public class FlagBeingCaptured
 {
     public string Name;
     public bool capturing;
 }
+
+/// <summary>
+/// The BaseAI
+/// Should be extended by your AI
+/// In a sense acts as a proxy between the AI and the Botcontroller
+/// </summary>
 public class BaseAI
 {
-    public MechController Mech = null;
+    private MechController controller;
 
-    /// <summary>
-    /// Another participant was 'seen'. Do something with the info stored in the even data
-    /// </summary>
-    /// <param name="e">The event data</param>
-    public virtual void OnScannedRobot(ScannedRobotEvent e)
+    public string name = "BaseIA";
+
+    // bit of a hack violating some OOP principles. But now the AI cannot access the game object
+    public MechController Controller { private get => controller; set => controller = value; }
+
+    public virtual void Update() { }
+
+    public virtual void OnRecordRadarBlib(RadarBlibInfo info)
     {
-        // 
     }
-
     public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)
     {
         // 
     }
-    //public virtual void OnSlopeDetected(SlopeDetectedEvent e)
-    //{
-    //    // 
-    //    //yield return Mech.SlopeDetected();
-    //}
-    /// <summary>
-    /// Move this Mech ahead by the given distance
-    /// </summary>
-    /// <param name="distance">The distance to move</param>
-    /// <returns></returns>
-    public IEnumerator Ahead(float distance) {
-        yield return Mech.__Ahead(distance);
+    protected void MoveForward()
+    {
+        Controller.MoveForward();
+    }
+    protected void Fire()
+    {
+        Debug.Log("Fire");
+    }
+    protected void Seek(Vector3 position)
+    {
+        Controller.Seek(position);
     }
 
-    /// <summary>
-    /// Move the Mech backwards by the given distance
-    /// </summary>
-    /// <param name="distance">The distance to move</param>
-    /// <returns></returns>
-    public IEnumerator Back(float distance) {
-        yield return Mech.__Back(distance);
+    protected Vector3 GetPosition()
+    {
+        return Controller.transform.position;
     }
 
-    /// <summary>
-    /// Turns the Mech left by the given angle
-    /// </summary>
-    /// <param name="angle">The angle to rotate</param>
-    /// <returns></returns>
-    public IEnumerator TurnLeft(float angle) {
-        yield return Mech.__TurnLeft(angle);
+    protected void Rotate(RotateDirection direction)
+    {
+        Controller.Rotate(direction);
     }
 
-    /// <summary>
-    /// Turns the Mech right by the given angle
-    /// </summary>
-    /// <param name="angle">The angle to rotate</param>
-    /// <returns></returns>
-    public IEnumerator TurnRight(float angle) {
-        yield return Mech.__TurnRight(angle);
+    protected void RotateTo(Vector3 direction)
+    {
+        Controller.RotateTo(direction);
     }
 
-    /// <summary>
-    /// Fire from the forward pointing cannon
-    /// </summary>
-    /// <param name="power">???</param>
-    /// <returns></returns>
-    public IEnumerator FireFront(float power) {
-        yield return Mech.__FireFront(power);
+    protected void SetKinematic(bool isKinematic)
+    {
+        Controller.GetComponent<Rigidbody>().isKinematic = isKinematic;
     }
 
-    public virtual IEnumerator RunAI() {
-        yield return null;
+    public void SetController(MechController controller)
+    {
+        Controller = controller;
     }
 }

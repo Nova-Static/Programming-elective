@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -6,20 +7,44 @@ using UnityEngine;
 /// </summary>
 public class DarwinsAi : BaseAI
 {
-    public override IEnumerator RunAI() {
-        for (int i = 0; i < 10; i++)
+    Dictionary<string, RadarBlibInfo> radar = new Dictionary<string, RadarBlibInfo>();
+
+    Vector3 MoveToPoint = Vector3.zero;
+
+    string targetName = "Manno";
+
+    public DarwinsAi()
+    {
+        name = "Darwins Ai";
+    }
+
+    public override void Update()
+    {
+        if (radar.ContainsKey(targetName))
         {
-            yield return Ahead(10);
+            //Seek(radar[targetName].position);
+        }
+
+        MoveForward();
+    }
+
+    public override void OnRecordRadarBlib(RadarBlibInfo info)
+    {
+
+        //Seek(radar[info.name].position);
+        Fire();
+        if (radar.ContainsKey(info.name))
+        {
+            radar[info.name] = info;
+        }
+        else
+        {
+            radar.Add(info.name, info);
         }
     }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    public override void OnScannedRobot(ScannedRobotEvent e)
+    public override void OnFlagBeingCaptured(FlagBeingCaptured e)
     {
-        Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
+        Debug.Log(e.Name);
     }
-
-    
 }

@@ -1,40 +1,48 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 /// <summary>
-/// An example AI.
-/// You can modify this template to make your own AI
+/// An example AI that is a bit more elaborate than <seealso cref="PondAI"/>.
 /// </summary>
 public class PondAI : BaseAI
 {
-    bool detectedRobot;
-    public override IEnumerator RunAI() {
-        while (true)
+    Dictionary<string, RadarBlibInfo> radar = new Dictionary<string, RadarBlibInfo>();
+
+    Vector3 MoveToPoint = Vector3.zero;
+
+    string targetName = "Manno";
+
+    public PondAI()
+    {
+        name = "Pond Ai";
+    }
+
+    public override void Update()
+    {
+        if (radar.ContainsKey(targetName))
         {
-            
-            yield return Ahead(30);
-            yield return TurnRight(180);
-            
+            //Seek(radar[targetName].position);
         }
     }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    public override void OnScannedRobot(ScannedRobotEvent e)
+    public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
-        FireFront(10f);
-        detectedRobot = true;
-       // Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
-    }
-    public override void OnFlagBeingCaptured(FlagBeingCaptured e)
-    {
-        //FireFront(10f);
-        //detectedRobot = true;
+
+        //Seek(radar[info.name].position);
+        Fire();
+        if (radar.ContainsKey(info.name))
+        {
+            radar[info.name] = info;
+        }
+        else
+        {
+            radar.Add(info.name, info);
+        }
     }
 
-    //public override void OnSlopeDetected(SlopeDetectedEvent e)
+    //public override void OnFlagBeingCaptured(FlagBeingCaptured e)
     //{
-    //    base.OnSlopeDetected(e);
-    //    Debug.Log("Stuck on slope");
+    //    Debug.Log(e.Name);
     //}
 }

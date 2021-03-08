@@ -1,55 +1,79 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 /// <summary>
-/// This is the class / component that manages the arena.
-/// It generates / Instantiates the AI game objects and lets the games begin!
+/// The Arena manager
 /// </summary>
 public class ArenaManager : MonoBehaviour
 {
-    // the prefab for the participants in the battle
-    public GameObject MechPrefab = null;
+    bool BattleStarted = false;
 
-    // The positions where the participants will be instantiated
-    // set in the inspector by dragging 4 gameobjects in the slots of the array
-    public Transform[] SpawnPoints = null;
+    BaseAI[] AIBots = null;
+    MechController[] Bots = null;
 
-    // the list that keeps track of all the participants
-    private List<MechController> pirateShips = new List<MechController>();
+    [SerializeField]
+    MechController Bot = null;
 
-    /// <summary>
-    /// creates the 4 ships that will do battle
-    /// 4 ship prefabs will be instantated and each will be assigned an AI derived from BaseAI
-    /// </summary>
+    SpawnPos[] spawnPositions = null;
+
     void Start()
     {
-        BaseAI[] aiArray = new BaseAI[] {
-            new DarwinsAi(), 
-            new PondAI(), 
-            new PondAI(), 
-            new PondAI()
-        };
+        spawnPositions = FindObjectsOfType<SpawnPos>();
+        PrepareArena();
+    }
 
-        for (int i = 0; i < 4; i++)
+    /// <summary>
+    /// Prepare the Arena so the battle can start any moment
+    /// The AI's are instantiated and assigned to the Bots (BotController)
+    /// </summary>
+    private void PrepareArena()
+    {
+        AIBots = new BaseAI[]
+                {
+            new DarwinsAi(),
+            new PondAI()
+                };
+
+        Bots = new MechController[spawnPositions.Length];
+
+        CheckConditions();
+
+        int loopCount = Math.Min(spawnPositions.Length, AIBots.Length);
+
+        for (int i = 0; i < loopCount; i++)
         {
-            GameObject mech = Instantiate(MechPrefab, SpawnPoints[i].position, SpawnPoints[i].rotation);
-            MechController mechController = mech.GetComponent<MechController>();
-            mechController.SetAI(aiArray[i]);
-            pirateShips.Add(mechController);
+            Transform position = spawnPositions[i].transform;
+            MechController instance = Instantiate(Bot, position.position, Quaternion.identity);
+            instance.setAI(AIBots[i]);
+            instance.name = AIBots[i].name;
+            Bots[i] = instance;
+        }
+    }
+
+    private void CheckConditions()
+    {
+        if (AIBots.Length < spawnPositions.Length)
+        {
+            Debug.LogWarning("More bot to be spawned than there are spawn locations.");
+        }
+        else if (spawnPositions.Length < AIBots.Length)
+        {
+            Debug.LogWarning("There is still a few spawn locations available.");
         }
     }
 
     /// <summary>
-    /// Start Battle obviously should be called only once.
-    /// Otherwise the ships will run multiple coroutines that manage their AI
-    /// <seealso cref="PirateShipController"/>
+    /// Start the battle when the space bar is pressed (and the battle has not yet started
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            foreach (var pirateShip in pirateShips) {
-                pirateShip.StartBattle();
+        if (!BattleStarted && Input.GetKeyDown(KeyCode.Space))
+        {
+            foreach (var bot in Bots)
+            {
+                bot.SetActive(true);
             }
+            BattleStarted = true;
         }
     }
 }
