@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Tag
   - UI
+  - Healthbar
   layers:
   - Default
   - TransparentFX

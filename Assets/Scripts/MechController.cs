@@ -39,9 +39,16 @@ public class MechController : MonoBehaviour
 
     public CinemachineImpulseSource CISource;
 
+    private AudioSource audio;
+    public AudioClip moveAudio;
+    public AudioClip shootAudio;
+    public AudioClip explodeAudio;
+    public AudioClip deathAudio;
+
     float timePerShot = 2f;
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         healthbar.SetMaxHealth(Maxhealth);
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
@@ -76,6 +83,10 @@ public class MechController : MonoBehaviour
     /// </summary>
     public void MoveForward()
     {
+        if (!audio.isPlaying)
+        {
+            audio.PlayOneShot(moveAudio,0.3f);
+        }
         //Vector3 newPosition = rigidbody.position + transform.forward * MaxSpeed * Time.deltaTime;
         Vector3 clampedPostion = Vector3.Max(Vector3.Min(transform.position, new Vector3(25, 0, 25)), new Vector3(-25, 0, -25));
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -117,6 +128,7 @@ public class MechController : MonoBehaviour
         if (timePerShot <= 0f)
         {
             timePerShot = 2f;
+            audio.PlayOneShot(shootAudio, 0.3f);
             GameObject newInstance = Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
             CISource.GenerateImpulse();
         }
@@ -172,6 +184,7 @@ public class MechController : MonoBehaviour
             currentHealth -= Damage;
             healthbar.SetHealth(currentHealth);
             Destroy(collision.collider.gameObject);
+            audio.PlayOneShot(explodeAudio, 0.3f);
             Instantiate(ExplosionPrefab, collision.collider.gameObject.transform.position, collision.collider.gameObject.transform.rotation);
         }
     }
@@ -193,6 +206,7 @@ public class MechController : MonoBehaviour
     }
     private void Die()
     {
+        audio.PlayOneShot(deathAudio, 0.3f);
         Destroy(gameObject);
     }
     private void FixedUpdate()
