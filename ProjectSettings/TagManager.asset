@@ -9,6 +9,7 @@ TagManager:
   - Eyes
   - Bullet
   - Tag
+  - UI
   layers:
   - Default
   - TransparentFX

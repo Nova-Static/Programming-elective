@@ -23,9 +23,12 @@ public class MechController : MonoBehaviour
 
     [SerializeField]
     float AngularSpeed = 10;
-
-    int Health = 100;
-    int Damage = 20;
+    
+    int Maxhealth = 100;
+    int currentHealth;
+    int Damage = 20; 
+    public ShowHealthBar healthbar;
+    
     public GameObject eyes;
     GameObject eyes2;
     LayerMask mask;
@@ -39,6 +42,7 @@ public class MechController : MonoBehaviour
     float timePerShot = 2f;
     void Start()
     {
+        healthbar.SetMaxHealth(Maxhealth);
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
         mask = LayerMask.GetMask("Mech");
@@ -49,6 +53,7 @@ public class MechController : MonoBehaviour
 
     void Awake()
     {
+        currentHealth = Maxhealth;
         // look at the center of the arena
         //transform.LookAt(Vector3.zero);
         rigidbody = GetComponent<Rigidbody>();
@@ -57,7 +62,6 @@ public class MechController : MonoBehaviour
 
     public void CapturingFlag()
     {
-        
         if (flagManager.name != null)
         {
             FlagBeingCaptured flagBeingCaptured = new FlagBeingCaptured();
@@ -153,7 +157,7 @@ public class MechController : MonoBehaviour
                 RadarBlibInfo info = new RadarBlibInfo();
                 info.visible = true;
                 info.name = other.gameObject.name;
-                info.health = other.gameObject.GetComponent<MechController>().Health;
+                info.health = other.gameObject.GetComponent<MechController>().currentHealth;
                 info.position = other.gameObject.transform.position;
                 AI.OnRecordRadarBlib(info);
             }
@@ -165,7 +169,8 @@ public class MechController : MonoBehaviour
         
         if (collision.collider.gameObject.tag.Equals("Bullet"))
         {
-            Health -= Damage;
+            currentHealth -= Damage;
+            healthbar.SetHealth(currentHealth);
             Destroy(collision.collider.gameObject);
             Instantiate(ExplosionPrefab, collision.collider.gameObject.transform.position, collision.collider.gameObject.transform.rotation);
         }
@@ -176,7 +181,7 @@ public class MechController : MonoBehaviour
     {
         if (IsActive)
         {
-            if (Health <= 0)
+            if (currentHealth <= 0)
             {
                 Die();
             }
