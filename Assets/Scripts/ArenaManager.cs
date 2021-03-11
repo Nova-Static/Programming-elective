@@ -32,7 +32,7 @@ public class ArenaManager : MonoBehaviour
                 {
             new DarwinsAi(),
             new PondAI(),
-            new DarwinsAi(),
+            new SzilardAi(),
             new PondAI()
                 };
 
