@@ -7,7 +7,7 @@ public class ShowHealthBar : MonoBehaviour
 {
     public Slider slider;
     public List<GameObject> MechsAlive = new List<GameObject>();
-
+    public Text text;
     void Start()
     {
         StartCoroutine("LateStart");
@@ -18,6 +18,7 @@ public class ShowHealthBar : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         MechsAlive.AddRange(GameObject.FindGameObjectsWithTag("Mech"));
         this.GetComponent<RectTransform>().localPosition -= new Vector3(0f, 35f * MechsAlive.IndexOf(transform.root.gameObject), 0f);
+        text.text = transform.root.name;
     }
 
     public void SetMaxHealth(int health)
