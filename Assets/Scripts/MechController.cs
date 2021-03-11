@@ -44,6 +44,7 @@ public class MechController : MonoBehaviour
     public AudioClip shootAudio;
     public AudioClip explodeAudio;
     public AudioClip deathAudio;
+    public Animator animator;
 
     float timePerShot = 2f;
     void Start()
@@ -54,7 +55,7 @@ public class MechController : MonoBehaviour
         flagManager = flag.GetComponent<FlagManager>();
         mask = LayerMask.GetMask("Mech");
         mask = ~mask;
-
+        animator = gameObject.GetComponentInChildren<Animator>();
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
     }
 
@@ -198,7 +199,14 @@ public class MechController : MonoBehaviour
             {
                 Die();
             }
-
+            if (rigidbody.velocity.magnitude > 0)
+            {
+                animator.SetBool("walking", true);
+            }
+            else
+            {
+                animator.SetBool("walking", false);
+            }
             Accelleration.Set(0, 0, 0);
             AI.Update();
             CapturingFlag();
