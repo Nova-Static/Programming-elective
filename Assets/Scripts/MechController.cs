@@ -213,7 +213,7 @@ public class MechController : MonoBehaviour
     {
         if (IsActive)
         {
-            Debug.Log($"Accelleration of {name} is {Accelleration}");
+           // Debug.Log($"Accelleration of {name} is {Accelleration}");
 
             rigidbody.velocity += Accelleration;
             if (timePerShot >= 0)
