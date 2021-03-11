@@ -85,7 +85,7 @@ public class MechController : MonoBehaviour
     {
         if (!audio.isPlaying)
         {
-            audio.PlayOneShot(moveAudio,0.3f);
+            audio.PlayOneShot(moveAudio,0.05f);
         }
         //Vector3 newPosition = rigidbody.position + transform.forward * MaxSpeed * Time.deltaTime;
         Vector3 clampedPostion = Vector3.Max(Vector3.Min(transform.position, new Vector3(25, 0, 25)), new Vector3(-25, 0, -25));

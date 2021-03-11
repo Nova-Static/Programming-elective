@@ -21,10 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a3b22647-e70f-49af-9738-59c4e5f718c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MechRobot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MechRobot.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MechController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MechController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +83,8 @@
       <updated>1615210881110</updated>
       <workItem from="1615210914473" duration="2345000" />
       <workItem from="1615287784755" duration="5114000" />
-      <workItem from="1615317232167" duration="1382000" />
+      <workItem from="1615317232167" duration="1634000" />
+      <workItem from="1615460868737" duration="92000" />
     </task>
     <servers />
   </component>
