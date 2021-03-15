@@ -9,6 +9,7 @@ public class FlagManager : MonoBehaviour
     public bool robot = false;
     public float timeToWin = 5f;
     public Image image;
+    public Canvas canvas;
     private float initialTimeToWin;
     private bool capturingFlag;
     List<GameObject> robots = new List<GameObject>();
@@ -35,6 +36,7 @@ public class FlagManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        canvas.transform.LookAt(GameObject.Find("CM_Camera1").transform);
         if (robots== null)
         {
             return;
