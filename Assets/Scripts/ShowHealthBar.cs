@@ -18,10 +18,12 @@ public class ShowHealthBar : MonoBehaviour
 
     IEnumerator LateStart()
     {
+        
         yield return new WaitForSeconds(0.1f);
         MechsAlive.AddRange(GameObject.FindGameObjectsWithTag("Mech"));
         this.GetComponent<RectTransform>().localPosition -= new Vector3(0f, 35f * MechsAlive.IndexOf(transform.root.gameObject), 0f);
         text.text = transform.root.name;
+        transform.SetParent(GameObject.Find("MainCanvas").transform);
     }
 
     public void SetMaxHealth(int health)

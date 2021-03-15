@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlagManager : MonoBehaviour
 {
     public string name;
     public bool robot = false;
-
+    public float timeToWin = 5f;
+    public Image image;
+    private float initialTimeToWin;
     private bool capturingFlag;
     List<GameObject> robots = new List<GameObject>();
 
+    private void Start()
+    {
+        initialTimeToWin = timeToWin;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Mech")
@@ -39,12 +46,16 @@ public class FlagManager : MonoBehaviour
         }
         if (robots.Count == 1)
         {
-            
+            image.fillAmount = timeToWin / initialTimeToWin;
+            timeToWin -= Time.deltaTime;
             name = robots[0].name;
         }
         else
         {
+            image.fillAmount = timeToWin / initialTimeToWin;
+            timeToWin = initialTimeToWin;
             name = null;
         }
+        
     }
 }
