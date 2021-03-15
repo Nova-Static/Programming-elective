@@ -13,9 +13,15 @@ public class FlagManager : MonoBehaviour
     private float initialTimeToWin;
     private bool capturingFlag;
     List<GameObject> robots = new List<GameObject>();
-
+    private GameObject[] fireworks;
+    private bool playerWon = false;
     private void Start()
     {
+        fireworks = GameObject.FindGameObjectsWithTag("Firework");
+        foreach (var pFireworks in fireworks)
+        {
+            pFireworks.GetComponent<ParticleSystem>().Stop();
+        }
         initialTimeToWin = timeToWin;
     }
     private void OnTriggerEnter(Collider other)
@@ -36,6 +42,7 @@ public class FlagManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         canvas.transform.LookAt(GameObject.Find("CM_Camera1").transform);
         if (robots== null)
         {
@@ -58,6 +65,17 @@ public class FlagManager : MonoBehaviour
             timeToWin = initialTimeToWin;
             name = null;
         }
-        
+        if (timeToWin <= 0)
+        {
+            if (!playerWon)
+            {
+                foreach (var pFireworks in fireworks)
+                {
+
+                    pFireworks.GetComponent<ParticleSystem>().Play();
+                }
+            }
+            playerWon = true;
+        }
     }
 }
