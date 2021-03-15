@@ -8,6 +8,9 @@ public class ShowHealthBar : MonoBehaviour
     public Slider slider;
     public List<GameObject> MechsAlive = new List<GameObject>();
     public Text text;
+    public Gradient gradient;
+    public Image fill;
+    
     void Start()
     {
         StartCoroutine("LateStart");
@@ -25,9 +28,12 @@ public class ShowHealthBar : MonoBehaviour
     {
         slider.maxValue = health;
         slider.value = health;
+
+        fill.color = gradient.Evaluate(1f);
     }
     public void SetHealth(int health)
     {
         slider.value = health;
+        fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
