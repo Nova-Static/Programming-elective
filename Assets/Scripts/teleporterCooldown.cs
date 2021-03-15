@@ -13,12 +13,12 @@ public class teleporterCooldown : MonoBehaviour
         if ((teleportGotUsed) && (teleportCooldown >= 0f))
         {
             teleportCooldown -= Time.deltaTime;
-            Debug.Log(teleportCooldown);
+            //Debug.Log(teleportCooldown);
         }
 
         if (teleportCooldown < 0f)
         {
-            Debug.Log("Reset Cooldown");
+            //Debug.Log("Reset Cooldown");
             teleportGotUsed = false;
             teleportCooldown = 5f;
         }
