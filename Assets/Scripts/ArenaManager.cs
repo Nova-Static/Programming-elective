@@ -64,6 +64,10 @@ public class ArenaManager : MonoBehaviour
         }
     }
 
+    private void WinCondition()
+    {
+
+    }
     /// <summary>
     /// Start the battle when the space bar is pressed (and the battle has not yet started
     /// </summary>

@@ -47,8 +47,8 @@ public class MechController : MonoBehaviour
     public AudioClip shootAudio;
     public AudioClip explodeAudio;
     public AudioClip deathAudio;
-    public Animator animator;
-
+    private Animator animator;
+    private Canvas canvas;
     float timePerShot = 2f;
     void Start()
     {
@@ -59,6 +59,8 @@ public class MechController : MonoBehaviour
         mask = LayerMask.GetMask("Mech");
         mask = ~mask;
         animator = gameObject.GetComponentInChildren<Animator>();
+        canvas = gameObject.GetComponentInChildren<Canvas>();
+        
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
     }
 

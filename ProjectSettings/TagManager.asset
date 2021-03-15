@@ -11,6 +11,8 @@ TagManager:
   - Tag
   - UI
   - Healthbar
+  - Fire
+  - Firework
   layers:
   - Default
   - TransparentFX
