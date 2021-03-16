@@ -21,8 +21,13 @@ public class teleporterScript : MonoBehaviour
     [SerializeField]
     public Transform child1Pos;
 
+    private AudioSource audio;
+
+    public AudioClip teleportAudio;
+
     private void Start()
     {
+
         parentCooldownManager = transform.parent.GetComponent<teleporterCooldown>();
 
         PS_1 = this.gameObject.transform.parent.GetChild(0).GetComponentInChildren<ParticleSystem>();
@@ -43,6 +48,9 @@ public class teleporterScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Mech"))
         {
+
+            audio = other.gameObject.GetComponent<AudioSource>();
+
             parentCooldownManager.teleportGotUsed = true;
             if (parentCooldownManager.teleportCooldown == 5)
             {
@@ -65,6 +73,10 @@ public class teleporterScript : MonoBehaviour
                 PS_1.Play();
                 PS_2.Play();
 
+                if (audio != null)
+                {
+                    audio.PlayOneShot(teleportAudio, PlayerPrefs.GetFloat("SFX", 0));
+                }
             }
         }           
         
