@@ -6,7 +6,9 @@
 /// </summary>
 public class CannonBall : MonoBehaviour
 {
+    public GameObject ExplosionPrefab;
     private float speed = 10f;
+    MechController MechController;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,19 @@ public class CannonBall : MonoBehaviour
     void FixedUpdate()
     {
         speed += Time.deltaTime*20;
-        transform.Translate(new Vector3(0f, 0f, speed * Time.fixedDeltaTime), Space.Self);
+        transform.Translate(Vector3.forward* speed * Time.fixedDeltaTime);
+       
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+        if (collision.collider.gameObject.tag.Equals("Mech"))
+        {
+            MechController = collision.gameObject.GetComponent<MechController>();
+            MechController.hitByBullet();
+            
+        }
+        Destroy(gameObject);
     }
 }

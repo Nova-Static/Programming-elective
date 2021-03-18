@@ -26,9 +26,9 @@ public class MechController : MonoBehaviour
     [SerializeField]
     float AngularSpeed = 10;
     
-    int Maxhealth = 100;
-    int currentHealth;
-    int Damage = 20; 
+    public float Maxhealth = 100f;
+    public float currentHealth;
+    public float Damage = 20f; 
     public ShowHealthBar healthbar;
     
     public GameObject eyes;
@@ -36,7 +36,7 @@ public class MechController : MonoBehaviour
     LayerMask mask;
     // the bullets and the locations on the prefab where they spawn from
     public GameObject BulletPrefab = null;
-    public GameObject ExplosionPrefab = null;
+   
     public Transform ShootOrigin = null;
 
     public CinemachineImpulseSource CISource;
@@ -53,7 +53,7 @@ public class MechController : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        healthbar.SetMaxHealth(Maxhealth);
+        healthbar.SetMaxHealth(Mathf.RoundToInt(Maxhealth));
         flag = GameObject.Find("Flag");
         flagManager = flag.GetComponent<FlagManager>();
         mask = LayerMask.GetMask("Mech");
@@ -166,34 +166,31 @@ public class MechController : MonoBehaviour
             eyes2 = other.gameObject.transform.GetChild(2).gameObject;
             if (Physics.Linecast(eyes.transform.position, eyes2.transform.position, mask))
             {
-                Debug.Log("blocked");
+               // Debug.Log("blocked");
             }
             else
             {
-                Debug.Log("Shoot");
+             //   Debug.Log("Shoot");
                 //Debug.Log($"{name} sees: {other.gameObject.GetComponent<BotController>().name}");
                 RadarBlibInfo info = new RadarBlibInfo();
                 info.visible = true;
                 info.name = other.gameObject.name;
-                info.health = other.gameObject.GetComponent<MechController>().currentHealth;
+                info.health = Mathf.RoundToInt(other.gameObject.GetComponent<MechController>().currentHealth);
                 info.position = other.gameObject.transform.position;
                 AI.OnRecordRadarBlib(info);
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    public void hitByBullet()
     {
+       
+            
+          
+            audio.PlayOneShot(explodeAudio, PlayerPrefs.GetFloat("SFX", 0) / 10);
+            
         
-        if (collision.collider.gameObject.tag.Equals("Bullet"))
-        {
-            currentHealth -= Damage;
-            healthbar.SetHealth(currentHealth);
-            Destroy(collision.collider.gameObject);
-            audio.PlayOneShot(explodeAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
-            Instantiate(ExplosionPrefab, collision.collider.gameObject.transform.position, collision.collider.gameObject.transform.rotation);
-        }
     }
+
     // Below this is stuff to make the 'architecture' work.
 
     void Update()
