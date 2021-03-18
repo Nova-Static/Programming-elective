@@ -7,10 +7,11 @@ public class ExplosionForce : MonoBehaviour
     public float radius;
     public float power;
     float distance;
-
+  
+    bool takingDamage;
     MechController MechController;
 
-    void Start()
+    void Awake()
     {
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
@@ -24,35 +25,40 @@ public class ExplosionForce : MonoBehaviour
                 if (hit.tag == "Mech")
                 {
                     power /= 2;
-                    MechController=hit.gameObject.GetComponent<MechController>();
+                    MechController = hit.gameObject.GetComponent<MechController>();
                     distance = Vector3.Distance(hit.transform.position, transform.position);
-                    Debug.Log("distance: "+distance);
+
+
                     if (distance > 3.3f)
                     {
+                        MechController.healthHealth = MechController.currentHealth;
                         //deal damage according to distance*max damage
-                        MechController.currentHealth -= ((Mathf.Clamp01(1 - distance / (radius/4))) * MechController.Damage);
-                        Debug.Log("damage from distance: "+((Mathf.Clamp01(1 - distance / (radius/4))) * MechController.Damage));
-                        MechController.healthbar.SetHealth(Mathf.RoundToInt(MechController.currentHealth));
+                        MechController.healthHealth -= ((Mathf.Clamp01(1 - distance / (radius / 4))) * MechController.Damage);
+                        MechController.damaging = true;
+
                     }
                     //if the distance is more than 3.3
                     else
                     {
+                        MechController.healthHealth = MechController.currentHealth;
 
-                        MechController.currentHealth -= MechController.Damage;
-                        MechController.healthbar.SetHealth(Mathf.RoundToInt(MechController.currentHealth));
-                        Debug.Log("maxDamage: " + MechController.Damage);
-                     
+                        MechController.healthHealth -= MechController.Damage;
+
+                        MechController.damaging = true;
 
                     }
 
-                 
+
+
                 }
-                 rb.AddExplosionForce(power, explosionPos, radius,10f);
+                rb.AddExplosionForce(power, explosionPos, radius, 10f);
             }
-           
+
         }
         GetComponent<Collider>().enabled = false;
-        Destroy(gameObject,5f);
+        Destroy(gameObject, 5f);
     }
+   
+   
 }
 

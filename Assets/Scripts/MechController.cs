@@ -25,7 +25,9 @@ public class MechController : MonoBehaviour
 
     [SerializeField]
     float AngularSpeed = 10;
-    
+
+    public bool damaging;
+    public float healthHealth;
     public float Maxhealth = 100f;
     public float currentHealth;
     public float Damage = 20f; 
@@ -221,6 +223,19 @@ public class MechController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (damaging)
+        {
+            if (healthHealth < currentHealth)
+            {
+                currentHealth--;
+                healthbar.SetHealth(Mathf.RoundToInt(currentHealth));
+            }
+            else
+            {
+                currentHealth = healthHealth;
+                damaging = false;
+            }
+        }
         if (IsActive)
         {
            // Debug.Log($"Accelleration of {name} is {Accelleration}");
@@ -256,4 +271,5 @@ public class MechController : MonoBehaviour
     {
         SetActive(true);
     }
+ 
 }
