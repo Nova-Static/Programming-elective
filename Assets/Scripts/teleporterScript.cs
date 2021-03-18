@@ -57,14 +57,14 @@ public class teleporterScript : MonoBehaviour
 
                 if (childNumber != 1)
                 {
-                    other.gameObject.transform.SetPositionAndRotation(child1Pos.position, other.gameObject.transform.rotation);
+                    other.gameObject.transform.SetPositionAndRotation(new Vector3(child1Pos.position.x, child1Pos.position.y + 2f, child1Pos.position.z), other.gameObject.transform.rotation);
 
                     Debug.Log("Teleport to child1");
 
                 }
                 else if (childNumber == 1)
                 {
-                    other.gameObject.transform.SetPositionAndRotation(child0Pos.position, other.gameObject.transform.rotation);
+                    other.gameObject.transform.SetPositionAndRotation(new Vector3(child0Pos.position.x, child0Pos.position.y + 2f, child0Pos.position.z), other.gameObject.transform.rotation);
 
                     Debug.Log("Teleport to child0");
 
