@@ -32,9 +32,7 @@ public class SzilardAi : BaseAI
 
         
     }
-    public override void OnTeleportersInfo(TeleportersInfo teleporter)
-    {
-    }
+   
 
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
