@@ -6,6 +6,7 @@ public class RadarBlibInfo
     public string name;
     public int health;
     public Vector3 position;
+    public Transform transform;
 }
 public class FlagBeingCaptured
 {
@@ -40,9 +41,9 @@ public class BaseAI
     {
         Controller.MoveForward();
     }
-    protected void Fire()
+    protected void Fire(Transform _direction)
     {
-        Controller.Fire();
+        Controller.Fire(_direction);
     }
     protected void Seek(Vector3 position)
     {

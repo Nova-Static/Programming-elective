@@ -9,6 +9,9 @@ public class CannonBall : MonoBehaviour
     public GameObject ExplosionPrefab;
     private float speed = 10f;
     MechController MechController;
+    private Vector3 target;
+
+    private Vector3 direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +21,17 @@ public class CannonBall : MonoBehaviour
     /// <summary>
     /// Makes the bullet fly
     /// </summary>
+    /// 
+
+    public void Seek2(Transform _direction)
+    {
+        transform.LookAt(_direction);
+    }
+
     void FixedUpdate()
     {
         speed += Time.deltaTime*20;
-        transform.Translate(Vector3.forward* speed * Time.fixedDeltaTime);
-       
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
     private void OnCollisionEnter(Collision collision)
     {

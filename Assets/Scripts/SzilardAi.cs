@@ -37,7 +37,7 @@ public class SzilardAi : BaseAI
     {
 
         //Seek(radar[info.name].position);
-        Fire();
+        Fire(info.transform);
         if (radar.ContainsKey(info.name))
         {
             radar[info.name] = info;
