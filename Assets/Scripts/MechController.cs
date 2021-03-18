@@ -52,6 +52,8 @@ public class MechController : MonoBehaviour
     private Animator animator;
     private Canvas canvas;
     float timePerShot = 2f;
+
+    private GameObject[] teleporters;
     void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -64,6 +66,7 @@ public class MechController : MonoBehaviour
         canvas = gameObject.GetComponentInChildren<Canvas>();
         
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
+        teleporters = GameObject.FindGameObjectsWithTag("Teleport");
     }
 
     void Awake()
@@ -131,13 +134,14 @@ public class MechController : MonoBehaviour
         rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
     }
 
-    public void Fire()
+    public void Fire(Transform _direction)
     {
         if (timePerShot <= 0f)
         {
             timePerShot = 2f;
             audio.PlayOneShot(shootAudio, PlayerPrefs.GetFloat("SFX", 0)/20);
-            GameObject newInstance = Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+            GameObject newInstance =(GameObject) Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+            newInstance.GetComponent<CannonBall>().Seek2(_direction);
             CISource.GenerateImpulse();
         }
     }
@@ -179,6 +183,7 @@ public class MechController : MonoBehaviour
                 info.name = other.gameObject.name;
                 info.health = Mathf.RoundToInt(other.gameObject.GetComponent<MechController>().currentHealth);
                 info.position = other.gameObject.transform.position;
+                info.transform = other.transform;
                 AI.OnRecordRadarBlib(info);
             }
         }
@@ -239,7 +244,13 @@ public class MechController : MonoBehaviour
         if (IsActive)
         {
            // Debug.Log($"Accelleration of {name} is {Accelleration}");
-
+            foreach(GameObject teleporter in teleporters)
+            {
+                TeleportersInfo tpInfo = new TeleportersInfo();
+                tpInfo.position = teleporter.transform.position;
+                AI.OnTeleportersInfo(tpInfo);
+            }
+            
             rigidbody.velocity += Accelleration;
             if (timePerShot >= 0)
             {

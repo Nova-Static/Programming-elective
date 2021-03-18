@@ -13,6 +13,7 @@ TagManager:
   - Healthbar
   - Fire
   - Firework
+  - Teleport
   layers:
   - Default
   - TransparentFX

@@ -32,12 +32,15 @@ public class SzilardAi : BaseAI
 
         
     }
+    public override void OnTeleportersInfo(TeleportersInfo teleporter)
+    {
+    }
 
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
 
         //Seek(radar[info.name].position);
-        Fire();
+        Fire(info.transform);
         if (radar.ContainsKey(info.name))
         {
             radar[info.name] = info;
