@@ -129,13 +129,14 @@ public class MechController : MonoBehaviour
         rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
     }
 
-    public void Fire()
+    public void Fire(Transform _direction)
     {
         if (timePerShot <= 0f)
         {
             timePerShot = 2f;
             audio.PlayOneShot(shootAudio, PlayerPrefs.GetFloat("SFX", 0)/20);
-            GameObject newInstance = Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+            GameObject newInstance =(GameObject) Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
+            newInstance.GetComponent<CannonBall>().Seek2(_direction);
             CISource.GenerateImpulse();
         }
     }
@@ -177,6 +178,7 @@ public class MechController : MonoBehaviour
                 info.name = other.gameObject.name;
                 info.health = Mathf.RoundToInt(other.gameObject.GetComponent<MechController>().currentHealth);
                 info.position = other.gameObject.transform.position;
+                info.transform = other.transform;
                 AI.OnRecordRadarBlib(info);
             }
         }
