@@ -50,6 +50,8 @@ public class MechController : MonoBehaviour
     private Animator animator;
     private Canvas canvas;
     float timePerShot = 2f;
+
+    private GameObject[] teleporters;
     void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -62,6 +64,7 @@ public class MechController : MonoBehaviour
         canvas = gameObject.GetComponentInChildren<Canvas>();
         
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
+        teleporters = GameObject.FindGameObjectsWithTag("Teleport");
     }
 
     void Awake()
@@ -226,7 +229,13 @@ public class MechController : MonoBehaviour
         if (IsActive)
         {
            // Debug.Log($"Accelleration of {name} is {Accelleration}");
-
+            foreach(GameObject teleporter in teleporters)
+            {
+                TeleportersInfo tpInfo = new TeleportersInfo();
+                tpInfo.position = teleporter.transform.position;
+                AI.OnTeleportersInfo(tpInfo);
+            }
+            
             rigidbody.velocity += Accelleration;
             if (timePerShot >= 0)
             {

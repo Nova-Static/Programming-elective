@@ -8,6 +8,10 @@ public class RadarBlibInfo
     public Vector3 position;
     public Transform transform;
 }
+public class TeleportersInfo
+{
+    public Vector3 position;
+}
 public class FlagBeingCaptured
 {
     public string Name;
@@ -31,6 +35,9 @@ public class BaseAI
     public virtual void Update() { }
 
     public virtual void OnRecordRadarBlib(RadarBlibInfo info)
+    {
+    }
+    public virtual void OnTeleportersInfo(TeleportersInfo info)
     {
     }
     public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)

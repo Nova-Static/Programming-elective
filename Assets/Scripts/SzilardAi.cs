@@ -32,6 +32,10 @@ public class SzilardAi : BaseAI
 
         
     }
+    public override void OnTeleportersInfo(TeleportersInfo teleporter)
+    {
+        Debug.Log(teleporter.position);
+    }
 
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
