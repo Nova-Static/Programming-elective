@@ -62,6 +62,11 @@ public class BaseAI
         return Controller.transform.position;
     }
 
+    protected float GetHealth()
+    {
+        return Controller.currentHealth;
+    }
+
     protected void Rotate(RotateDirection direction)
     {
         Controller.Rotate(direction);
