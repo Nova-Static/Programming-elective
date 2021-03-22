@@ -57,7 +57,7 @@ public class SoundSaver : MonoBehaviour
                 {
                     if (audioSource.clip.name == "music")
                     {
-                        audioSource.volume = slider.value/10;
+                        audioSource.volume = slider.value/5;
                     }
                 }
                 break;
