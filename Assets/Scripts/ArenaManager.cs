@@ -31,9 +31,9 @@ public class ArenaManager : MonoBehaviour
         AIBots = new BaseAI[]
                 {
             new DarwinsAi(),
-            new PondAI(),
-            new PondAI(),
-            new SzilardAi()
+            //new PondAI(),
+            //new PondAI(),
+            //new SzilardAi()
                 };
 
         Bots = new MechController[spawnPositions.Length];

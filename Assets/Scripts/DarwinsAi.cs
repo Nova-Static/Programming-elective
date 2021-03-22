@@ -11,7 +11,9 @@ public class DarwinsAi : BaseAI
 
     Vector3 MoveToPoint = Vector3.zero;
 
-    string targetName = "Manno";
+    Vector3 FlagPosition;
+
+    bool searchingForEnemy = false;
 
     public DarwinsAi()
     {
@@ -20,19 +22,39 @@ public class DarwinsAi : BaseAI
 
     public override void Update()
     {
-        if (radar.ContainsKey(targetName))
+
+
+        if (!getCapturingState())
         {
-            //Seek(radar[targetName].position);
+            Debug.Log(getCapturingState());
+            if (Vector3.Angle(GetForwardDirection(), FlagPosition - GetPosition()) > 5)
+            {
+                RotateTo(FlagPosition - (GetPosition()));
+            }
+            else
+            {
+                MoveForward();
+            }
+
+
+        } else
+        {
+            searchingForEnemy = true;
+            Debug.Log(getCapturingState());
         }
 
-        MoveForward();
+        if ((searchingForEnemy && getCapturingState()))
+        {
+            RotateTo(new Vector3(0f, 0f, 45f));
+        }
+
     }
 
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
-
-        //Seek(radar[info.name].position);
+        searchingForEnemy = false;
         Fire(info.transform);
+
         if (radar.ContainsKey(info.name))
         {
             radar[info.name] = info;
@@ -41,10 +63,16 @@ public class DarwinsAi : BaseAI
         {
             radar.Add(info.name, info);
         }
+
+
     }
 
     public override void OnFlagBeingCaptured(FlagBeingCaptured e)
     {
+    }
 
+    public override void OnFlagInfo(FlagInfo info)
+    {
+        FlagPosition = info.position;
     }
 }

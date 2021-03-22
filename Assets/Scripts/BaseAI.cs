@@ -12,6 +12,10 @@ public class TeleportersInfo
 {
     public Vector3 position;
 }
+public class FlagInfo
+{
+    public Vector3 position;
+}
 public class FlagBeingCaptured
 {
     public string Name;
@@ -40,10 +44,19 @@ public class BaseAI
     public virtual void OnTeleportersInfo(TeleportersInfo info)
     {
     }
-    public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)
+    
+    public virtual void OnFlagInfo(FlagInfo info)
     {
-        // 
     }
+    public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)
+    {        
+    }
+
+    protected bool getCapturingState()
+    {
+        return Controller.getCapturingState();
+    }
+
     protected void MoveForward()
     {
         Controller.MoveForward();
@@ -60,6 +73,11 @@ public class BaseAI
     protected Vector3 GetPosition()
     {
         return Controller.transform.position;
+    }
+
+    protected Vector3 GetForwardDirection()
+    {
+        return Controller.transform.forward;
     }
 
     protected float GetHealth()

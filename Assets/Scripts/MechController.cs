@@ -59,6 +59,12 @@ public class MechController : MonoBehaviour
         audio = GetComponent<AudioSource>();
         healthbar.SetMaxHealth(Mathf.RoundToInt(Maxhealth));
         flag = GameObject.Find("Flag");
+
+        // Add Flag info to AI function
+        FlagInfo fInfo = new FlagInfo();
+        fInfo.position = flag.transform.position;
+        AI.OnFlagInfo(fInfo);
+
         flagManager = flag.GetComponent<FlagManager>();
         mask = LayerMask.GetMask("Mech");
         mask = ~mask;
@@ -71,6 +77,9 @@ public class MechController : MonoBehaviour
 
     void Awake()
     {
+        // Make sure all Mechs have the same speed (independant from inspector values)
+        MaxSpeed = 5;
+
         currentHealth = Maxhealth;
         // look at the center of the arena
         //transform.LookAt(Vector3.zero);
@@ -87,6 +96,11 @@ public class MechController : MonoBehaviour
             flagBeingCaptured.capturing = flagManager.robot;
             AI.OnFlagBeingCaptured(flagBeingCaptured);
         }
+    }
+
+    public bool getCapturingState()
+    {
+        return flagManager.robot;
     }
 
     /// <summary>

@@ -26,8 +26,7 @@ public class FlagManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Mech")
-        {
+        if (other.tag == "Mech")       {
             
             robots.Add(other.gameObject);
         }
