@@ -18,7 +18,7 @@ public class MechController : MonoBehaviour
 
     private Vector3 Accelleration = Vector3.zero;
     // The flag trigger
-    private GameObject flag = null;
+    public GameObject flag = null;
     private FlagManager flagManager;
     [SerializeField]
     float MaxSpeed = 5;
@@ -168,8 +168,11 @@ public class MechController : MonoBehaviour
     public void RotateTo(Vector3 targetDirection)
     {
         float singleStep = Mathf.Deg2Rad * AngularSpeed * Time.deltaTime;
+
+
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
+       // transform.LookAt(targetDirection);
 
         Debug.Log("Rotating");
         Debug.DrawRay(transform.position, targetDirection, Color.magenta, 1);

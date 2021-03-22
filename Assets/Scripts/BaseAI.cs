@@ -84,7 +84,15 @@ public class BaseAI
     {
         return Controller.currentHealth;
     }
+    protected Vector3 GetForwardPos()
+    {
+        return Controller.transform.forward;
+    }
 
+    protected Vector3 GetFlagPos()
+    {
+        return Controller.flag.transform.position;
+    }
     protected void Rotate(RotateDirection direction)
     {
         Controller.Rotate(direction);
