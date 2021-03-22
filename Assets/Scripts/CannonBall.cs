@@ -7,7 +7,7 @@
 public class CannonBall : MonoBehaviour
 {
     public GameObject ExplosionPrefab;
-    private float speed = 10f;
+    private float speed = 15f;
     MechController MechController;
     private Vector3 target;
 

@@ -10,9 +10,27 @@ public class SzilardAi : BaseAI
     Vector3 MoveToPoint = Vector3.zero;
 
     string targetName = "Manno";
+    
+    
+
+    [Header("In Combat")]
+    float lastHealth;
+    float lastHitTime;
+    float timeSinceLastHit = 99f;
+    bool underAttack;
+    bool enemyInView;
+
+    [Header("On Lookout")]
     bool enemyFound;
+    float timeEnemyFound;
+    float timeSinceEnemyFound = 99f;
 
+    [Header("Target")]
+    Vector3 targetLastPos;
+    Quaternion angleToTarget;
 
+    [Header("Flag")]
+    float distanceToFlag;
 
     public SzilardAi()
     {
@@ -21,20 +39,83 @@ public class SzilardAi : BaseAI
 
     public override void Update()
     {
-        if (radar.ContainsKey(targetName))
+        if (lastHealth != GetHealth())
         {
-            //Seek(radar[targetName].position);
+            lastHealth = GetHealth();
+            lastHitTime = Time.time;
+            underAttack = true;
         }
-        if (!enemyFound)
+        if (timeSinceLastHit > 4f)
+        {
+            underAttack = false;
+        }
+        if (timeSinceEnemyFound > 3f)
+        {
+            enemyInView = false;
+        }
+        if (underAttack && !enemyInView)
         {
             MoveForward();
+            Rotate(RotateDirection.Right);
         }
+        if (enemyInView)
+        {
+            if (Vector3.Distance(GetPosition(), targetLastPos) > 8f)
+            {
+                MoveForward();
+            }
+            RotateTo(targetLastPos - (GetPosition()));
+        }
+
+        if (!enemyInView && !underAttack)
+        {
+            distanceToFlag = Vector3.Distance(GetPosition(), GetFlagPos());
+
+            if (distanceToFlag >= 3f)
+            {
+                GoBackToFlag();
+                if (distanceToFlag >= 40f)
+                {
+                    GoBackToFlag();
+                }
+                else
+                {
+                    RoamFlag();
+                }
+
+            }
+
+        }
+       
+        timeSinceLastHit = Time.time - lastHitTime;
+        timeSinceEnemyFound = Time.time - timeEnemyFound;
         
     }
    
-
+    private void RoamFlag()
+    {
+        MoveForward();
+        Rotate(RotateDirection.Right);
+    }
+    private void GoBackToFlag()
+    {
+        RotateTo(GetFlagPos() - (GetPosition()));
+        //if (Vector3.Angle(GetForwardDirection(), GetFlagPos() - GetPosition()) > 5)
+        //{
+        //    RotateTo(GetFlagPos() - (GetPosition()));
+        //}
+        //Vector3 targetFlag = new Vector3(10.3f, -3.1f, 1.6f);
+        //Debug.Log(GetFlagPos());
+        //RotateTo(targetFlag);
+        MoveForward();
+    }
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
+        if (underAttack)
+        {
+            enemyInView = true;
+
+        }
 
         //Seek(radar[info.name].position);
         Fire(info.transform);
@@ -46,6 +127,8 @@ public class SzilardAi : BaseAI
         {
             radar.Add(info.name, info);
         }
+        targetLastPos = info.position;
+        timeEnemyFound = Time.time;
         enemyFound = true;
     }
 
@@ -69,8 +152,8 @@ public class SzilardAi : BaseAI
            
         foreach (var tPos in telePos)
         {
-            if (Vector3.Distance(tPos, GetPosition()) < distance){
-                distance = Vector3.Distance(tPos, GetPosition());
+            if (Vector3.Distance(GetPosition(), tPos) < distance){
+                distance = Vector3.Distance(GetPosition(), tPos );
                 locOfClosestPos = tPos;
             }
         }
