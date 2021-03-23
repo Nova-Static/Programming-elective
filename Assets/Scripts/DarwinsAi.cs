@@ -45,7 +45,7 @@ public class DarwinsAi : BaseAI
 
         if ((searchingForEnemy && getCapturingState()))
         {
-            RotateTo(new Vector3(0f, 0f, 45f));
+            RotateTo(new Vector3(GetForwardDirection().x, GetForwardDirection().y, GetForwardDirection().z));
         }
 
     }
