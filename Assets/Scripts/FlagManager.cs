@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class FlagManager : MonoBehaviour
@@ -15,6 +16,13 @@ public class FlagManager : MonoBehaviour
     List<GameObject> robots = new List<GameObject>();
     private GameObject[] fireworks;
     private bool playerWon = false;
+
+    [SerializeField]
+    public Canvas WinningScreen;
+
+    [SerializeField]
+    public TMPro.TextMeshProUGUI WinningText;
+
     private void Start()
     {
         fireworks = GameObject.FindGameObjectsWithTag("Firework");
@@ -70,9 +78,14 @@ public class FlagManager : MonoBehaviour
             {
                 foreach (var pFireworks in fireworks)
                 {
-
                     pFireworks.GetComponent<ParticleSystem>().Play();
                 }
+
+                WinningScreen.gameObject.SetActive(true);
+                WinningText.text = ("Winner is: " + robots[0].name);
+                
+
+
             }
             playerWon = true;
         }

@@ -43,9 +43,9 @@ public class DarwinsAi : BaseAI
             Debug.Log(getCapturingState());
         }
 
-        if ((searchingForEnemy && getCapturingState()))
+        if ((searchingForEnemy && getCapturingState() && (Vector3.Distance(GetPosition(), FlagPosition) < 5.0f)))
         {
-            RotateTo(new Vector3(GetForwardDirection().x, GetForwardDirection().y, GetForwardDirection().z));
+            Rotate(RotateDirection.Left);
         }
 
     }
