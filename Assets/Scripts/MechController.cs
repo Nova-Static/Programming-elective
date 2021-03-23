@@ -24,7 +24,7 @@ public class MechController : MonoBehaviour
     float MaxSpeed = 5;
 
     [SerializeField]
-    float AngularSpeed = 10;
+    float AngularSpeed = 50;
 
     public bool damaging;
     public float healthHealth;
@@ -79,6 +79,7 @@ public class MechController : MonoBehaviour
     {
         // Make sure all Mechs have the same speed (independant from inspector values)
         MaxSpeed = 5;
+        AngularSpeed = 50;
 
         currentHealth = Maxhealth;
         // look at the center of the arena
@@ -174,7 +175,7 @@ public class MechController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
        // transform.LookAt(targetDirection);
 
-        Debug.Log("Rotating");
+        //Debug.Log("Rotating");
         Debug.DrawRay(transform.position, targetDirection, Color.magenta, 1);
     }
 

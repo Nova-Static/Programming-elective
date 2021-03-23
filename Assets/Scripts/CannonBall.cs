@@ -35,7 +35,7 @@ public class CannonBall : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         Instantiate(ExplosionPrefab, transform.position, transform.rotation);
         if (collision.collider.gameObject.tag.Equals("Mech"))
         {
