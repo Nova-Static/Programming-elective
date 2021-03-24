@@ -49,6 +49,7 @@ public class FlagManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.tag.Equals("Mech"))
         {
             if (!robots.Contains(other.gameObject))
@@ -101,5 +102,6 @@ public class FlagManager : MonoBehaviour
             }
             playerWon = true;
         }
+        robots.Clear();
     }
 }
