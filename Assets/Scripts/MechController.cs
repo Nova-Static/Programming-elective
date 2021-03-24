@@ -50,12 +50,19 @@ public class MechController : MonoBehaviour
     public AudioClip explodeAudio;
     public AudioClip deathAudio;
     private Animator animator;
+    public Renderer rendMesh;
+    //Get the Renderer component from the new cube
+
+
+    //Call SetColor using the shader property name "_Color" and setting the color to red
+
     private Canvas canvas;
     float timePerShot = 2f;
 
     private GameObject[] teleporters;
     void Start()
     {
+        //rendMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         audio = GetComponent<AudioSource>();
         healthbar.SetMaxHealth(Mathf.RoundToInt(Maxhealth));
         flag = GameObject.Find("Flag");
@@ -252,11 +259,13 @@ public class MechController : MonoBehaviour
             {
                 currentHealth--;
                 healthbar.SetHealth(Mathf.RoundToInt(currentHealth));
+                rendMesh.material.color = Color.red;
             }
             else
             {
                 currentHealth = healthHealth;
                 damaging = false;
+                rendMesh.material.color = Color.white;
             }
         }
         if (IsActive)
