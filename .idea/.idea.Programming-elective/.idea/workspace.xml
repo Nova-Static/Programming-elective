@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3b22647-e70f-49af-9738-59c4e5f718c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +33,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RamjarAI.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/ShowHealth.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MechController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ShowHealthBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SzilardAi.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RamjarAI.cs" />
       </list>
     </option>
   </component>
@@ -85,6 +93,7 @@
       <workItem from="1615287784755" duration="5114000" />
       <workItem from="1615317232167" duration="1634000" />
       <workItem from="1615460868737" duration="92000" />
+      <workItem from="1616581461729" duration="11835000" />
     </task>
     <servers />
   </component>

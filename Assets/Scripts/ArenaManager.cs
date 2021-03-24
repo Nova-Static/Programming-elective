@@ -31,7 +31,7 @@ public class ArenaManager : MonoBehaviour
         AIBots = new BaseAI[]
                 {
             new DarwinsAi(),
-            //new PondAI(),
+            new RamjarAI(),
             //new PondAI(),
             new SzilardAi()
                 };

@@ -7,6 +7,59 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="CrossPlatformInput" t="Include">
+          <e p="CrossPlatformInputGuidelines.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="AxisTouchButton.cs" t="Include" />
+            <e p="ButtonHandler.cs" t="Include" />
+            <e p="CrossPlatformInputManager.cs" t="Include" />
+            <e p="InputAxisScrollbar.cs" t="Include" />
+            <e p="Joystick.cs" t="Include" />
+            <e p="MobileControlRig.cs" t="Include" />
+            <e p="PlatformSpecific" t="Include">
+              <e p="MobileInput.cs" t="Include" />
+              <e p="StandaloneInput.cs" t="Include" />
+            </e>
+            <e p="TiltInput.cs" t="Include" />
+            <e p="TouchPad.cs" t="Include" />
+            <e p="VirtualInput.cs" t="Include" />
+          </e>
+        </e>
+        <e p="ParticleSystems" t="Include">
+          <e p="ParticleSystemsGuidelines.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="AfterburnerPhysicsForce.cs" t="Include" />
+            <e p="ExplosionFireAndDebris.cs" t="Include" />
+            <e p="ExplosionPhysicsForce.cs" t="Include" />
+            <e p="Explosive.cs" t="Include" />
+            <e p="ExtinguishableParticleSystem.cs" t="Include" />
+            <e p="FireLight.cs" t="Include" />
+            <e p="Hose.cs" t="Include" />
+            <e p="ParticleSystemMultiplier.cs" t="Include" />
+            <e p="SmokeParticles.cs" t="Include" />
+            <e p="WaterHoseParticles.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="PriorityParticleAdd.shader" t="Include" />
+            <e p="PriorityParticleAddSoft.shader" t="Include" />
+            <e p="PriorityParticleAlpha.shader" t="Include" />
+          </e>
+        </e>
+        <e p="Rocks" t="Include">
+          <e p="readme.txt" t="Include" />
+        </e>
+        <e p="Samples" t="Include">
+          <e p="Polybrush" t="Include">
+            <e p="1.0.2" t="Include">
+              <e p="Shader Examples (Standard)" t="Include">
+                <e p="Shader" t="Include">
+                  <e p="StandardTextureBlend.shader" t="Include" />
+                  <e p="StandardVertexColor.shader" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="ArenaManager.cs" t="Include" />
           <e p="BaseAI.cs" t="Include" />
@@ -19,12 +72,49 @@
           <e p="MechController.cs" t="Include" />
           <e p="mechGetter.cs" t="Include" />
           <e p="PondAI.cs" t="Include" />
+          <e p="RamjarAI.cs" t="Include" />
           <e p="ShowHealthBar.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
+          <e p="Sounds" t="Include">
+            <e p="SoundDissabler.cs" t="Include" />
+            <e p="SoundSaver.cs" t="Include" />
+          </e>
           <e p="SpawnPos.cs" t="Include" />
+          <e p="SzilardAi.cs" t="Include" />
           <e p="teleporterCooldown.cs" t="Include" />
           <e p="teleporterScript.cs" t="Include" />
-          <e p="TempEyes.cs" t="Include" />
+        </e>
+        <e p="terrainexport.cs" t="Include" />
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+            <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+            <e p="TMP_Bitmap.shader" t="Include" />
+            <e p="TMP_SDF Overlay.shader" t="Include" />
+            <e p="TMP_SDF SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+            <e p="TMP_SDF-Mobile SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface.shader" t="Include" />
+            <e p="TMP_SDF.shader" t="Include" />
+            <e p="TMP_Sprite.shader" t="Include" />
+            <e p="TMPro.cginc" t="Include" />
+            <e p="TMPro_Mobile.cginc" t="Include" />
+            <e p="TMPro_Properties.cginc" t="Include" />
+            <e p="TMPro_Surface.cginc" t="Include" />
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
         </e>
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">
@@ -33,6 +123,32 @@
             </e>
             <e p="Readme.cs" t="Include" />
           </e>
+        </e>
+        <e p="Utility" t="Include">
+          <e p="ActivateTrigger.cs" t="Include" />
+          <e p="AlphaButtonClickMask.cs" t="Include" />
+          <e p="AutoMobileShaderSwitch.cs" t="Include" />
+          <e p="AutoMoveAndRotate.cs" t="Include" />
+          <e p="CameraRefocus.cs" t="Include" />
+          <e p="CurveControlledBob.cs" t="Include" />
+          <e p="DragRigidbody.cs" t="Include" />
+          <e p="DynamicShadowSettings.cs" t="Include" />
+          <e p="EventSystemChecker.cs" t="Include" />
+          <e p="FollowTarget.cs" t="Include" />
+          <e p="ForcedReset.cs" t="Include" />
+          <e p="FOVKick.cs" t="Include" />
+          <e p="FPSCounter.cs" t="Include" />
+          <e p="LerpControlledBob.cs" t="Include" />
+          <e p="ObjectResetter.cs" t="Include" />
+          <e p="ParticleSystemDestroyer.cs" t="Include" />
+          <e p="PlatformSpecificContent.cs" t="Include" />
+          <e p="SimpleActivatorMenu.cs" t="Include" />
+          <e p="SimpleMouseRotator.cs" t="Include" />
+          <e p="SmoothFollow.cs" t="Include" />
+          <e p="TimedObjectActivator.cs" t="Include" />
+          <e p="TimedObjectDestructor.cs" t="Include" />
+          <e p="WaypointCircuit.cs" t="Include" />
+          <e p="WaypointProgressTracker.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
