@@ -71,18 +71,22 @@ public class SzilardAi : BaseAI
         {
             distanceToFlag = Vector3.Distance(GetPosition(), GetFlagPos());
 
-            if (distanceToFlag >= 3f)
+            if (distanceToFlag >= 10f)
             {
                 GoBackToFlag();
-                if (distanceToFlag >= 40f)
-                {
-                    GoBackToFlag();
-                }
-                else
+                
+
+            }
+            else
+            {
+                if (distanceToFlag <= 40f && distanceToFlag >= 3f && !getCapturingState())
                 {
                     RoamFlag();
                 }
-
+            }
+            if (getCapturingState() && distanceToFlag >= 3f)
+            {
+                GoBackToFlag();
             }
 
         }
@@ -95,6 +99,7 @@ public class SzilardAi : BaseAI
     private void RoamFlag()
     {
         MoveForward();
+        Rotate(RotateDirection.Right);
         Rotate(RotateDirection.Right);
     }
     private void GoBackToFlag()
@@ -119,14 +124,7 @@ public class SzilardAi : BaseAI
 
         //Seek(radar[info.name].position);
         Fire(info.transform);
-        if (radar.ContainsKey(info.name))
-        {
-            radar[info.name] = info;
-        }
-        else
-        {
-            radar.Add(info.name, info);
-        }
+
         targetLastPos = info.position;
         timeEnemyFound = Time.time;
         enemyFound = true;

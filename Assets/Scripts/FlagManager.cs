@@ -32,18 +32,30 @@ public class FlagManager : MonoBehaviour
         }
         initialTimeToWin = timeToWin;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Mech")       {
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Mech")       {
             
-            robots.Add(other.gameObject);
-        }
-    }
+    //        robots.Add(other.gameObject);
+    //    }
+    //}
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.Equals("Mech"))
         {
             robots.Remove(other.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Mech"))
+        {
+            if (!robots.Contains(other.gameObject))
+            {
+                robots.Add(other.gameObject);
+            }
+            
         }
     }
 
