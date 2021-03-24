@@ -51,7 +51,7 @@ public class ExplosionForce : MonoBehaviour
 
 
                 }
-                rb.AddExplosionForce(power, explosionPos, radius, 10f);
+                //rb.AddExplosionForce(power, explosionPos, radius, 10f);
             }
 
         }

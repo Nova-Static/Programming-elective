@@ -19,7 +19,8 @@ public class DarwinsAi : BaseAI
     private float delaySearchEnemy = 1.0f;
     private bool delayStart = false;
 
-    private GameObject forwardTransform = new GameObject();
+    private GameObject FlagTransform = new GameObject();
+    private bool gotFlagTranform = false;
 
     public DarwinsAi()
     {
@@ -28,6 +29,12 @@ public class DarwinsAi : BaseAI
 
     public override void Update()
     {
+        if (!gotFlagTranform)
+        {
+            FlagTransform.transform.position = FlagPosition;
+            gotFlagTranform = true;
+        }
+
 
         // Get distance to Flag
         if (Vector3.Distance(GetPosition(), FlagPosition) < 5.0f) { nearFlag = true; }
@@ -39,7 +46,7 @@ public class DarwinsAi : BaseAI
             if (!delayStart)
             {
                 if (Vector3.Angle(GetForwardDirection(), FlagPosition - GetPosition()) > 5)
-                {
+                {                  
                     RotateTo(FlagPosition - (GetPosition()));
                 }
                 else
@@ -50,17 +57,15 @@ public class DarwinsAi : BaseAI
         } else if (!delayStart)
         {
             Rotate(RotateDirection.Left);
-
-            // the forward transform to shoot while roaming
-            forwardTransform.transform.position = GetPosition() + GetForwardDirection() * 20;
-            Fire(forwardTransform.transform);
         }
 
         if (delayStart)
         {
             delaySearchEnemy -= Time.deltaTime;
-            RotateTo(LatestEnemyPos);
-            Debug.LogWarning(LatestEnemyPos);
+            if (LatestEnemyPos != null)
+            {
+                RotateTo(LatestEnemyPos - GetPosition());
+            }
         }
 
         if (delaySearchEnemy <= 0.0f)
