@@ -39,13 +39,7 @@ public class FlagManager : MonoBehaviour
     //        robots.Add(other.gameObject);
     //    }
     //}
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag.Equals("Mech"))
-        {
-            robots.Remove(other.gameObject);
-        }
-    }
+   
 
     private void OnTriggerStay(Collider other)
     {
@@ -77,7 +71,10 @@ public class FlagManager : MonoBehaviour
         {
             image.fillAmount = timeToWin / initialTimeToWin;
             timeToWin -= Time.deltaTime;
-            name = robots[0].name;
+            if (robots[0] != null)
+            {
+                name = robots[0].name;
+            }
         }
         else
         {

@@ -80,6 +80,7 @@ public class MechController : MonoBehaviour
         
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
         teleporters = GameObject.FindGameObjectsWithTag("Teleport");
+        AI.Start();
     }
 
     void Awake()

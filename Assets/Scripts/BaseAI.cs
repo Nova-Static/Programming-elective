@@ -36,7 +36,7 @@ public class BaseAI
     // bit of a hack violating some OOP principles. But now the AI cannot access the game object
     public MechController Controller { private get => controller; set => controller = value; }
 
-
+    public virtual void Start() { }
     public virtual void Update() { }
 
     public virtual void OnRecordRadarBlib(RadarBlibInfo info)

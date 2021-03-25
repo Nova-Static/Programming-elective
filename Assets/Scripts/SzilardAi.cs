@@ -32,11 +32,18 @@ public class SzilardAi : BaseAI
     [Header("Flag")]
     float distanceToFlag;
 
+    Obstacle[] Obstacles;
+    private Vector3 velocity = Vector3.zero;
+
     public SzilardAi()
     {
         name = "Szilard Ai";
     }
 
+    public override void Start()
+    {
+        Obstacles = GameObject.FindObjectsOfType<Obstacle>();
+    }
     public override void Update()
     {
         if (lastHealth != GetHealth())
@@ -66,6 +73,11 @@ public class SzilardAi : BaseAI
             }
             RotateTo(targetLastPos - (GetPosition()));
         }
+        else if(enemyInView && underAttack)
+        {
+            MoveForward();
+            Rotate(RotateDirection.Right);
+        }
 
         if (!enemyInView && !underAttack)
         {
@@ -84,13 +96,25 @@ public class SzilardAi : BaseAI
                     RoamFlag();
                 }
             }
-            if (getCapturingState() && distanceToFlag >= 3f)
+            if (getCapturingState() && distanceToFlag >= 5f)
             {
                 GoBackToFlag();
             }
 
         }
-       
+        foreach (var obstacle in Obstacles)
+        {
+            float d = 1 / Vector3.Distance(obstacle.transform.position, GetPosition());
+            if (d > .1f)
+            {
+                Vector3 force = (GetPosition() - obstacle.transform.position).normalized;
+                force *= d;
+                force *= obstacle.Force;
+                velocity = (velocity + force).normalized;
+                GetTransfrom().Translate(velocity * Time.deltaTime);
+            }
+        }
+
         timeSinceLastHit = Time.time - lastHitTime;
         timeSinceEnemyFound = Time.time - timeEnemyFound;
         
@@ -105,13 +129,6 @@ public class SzilardAi : BaseAI
     private void GoBackToFlag()
     {
         RotateTo(GetFlagPos() - (GetPosition()));
-        //if (Vector3.Angle(GetForwardDirection(), GetFlagPos() - GetPosition()) > 5)
-        //{
-        //    RotateTo(GetFlagPos() - (GetPosition()));
-        //}
-        //Vector3 targetFlag = new Vector3(10.3f, -3.1f, 1.6f);
-        //Debug.Log(GetFlagPos());
-        //RotateTo(targetFlag);
         MoveForward();
     }
     public override void OnRecordRadarBlib(RadarBlibInfo info)
