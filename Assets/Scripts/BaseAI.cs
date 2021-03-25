@@ -75,6 +75,11 @@ public class BaseAI
     {
         return Controller.transform.position;
     }
+ 
+    protected Transform GetTransfrom()
+    {
+        return Controller.transform;
+    }
 
 
 
