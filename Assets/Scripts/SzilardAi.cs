@@ -64,6 +64,8 @@ public class SzilardAi : BaseAI
         {
             MoveForward();
             Rotate(RotateDirection.Right);
+
+            Rotate(RotateDirection.Right);
         }
         if (enemyInView && !underAttack)
         {
@@ -76,7 +78,19 @@ public class SzilardAi : BaseAI
         else if(enemyInView && underAttack)
         {
             MoveForward();
-            Rotate(RotateDirection.Right);
+
+            float angle = AngleDir(GetForwardPos(), targetLastPos, GetTransfrom().up);
+            if (angle == -1)
+            {
+                Debug.Log("Rotate angle left");
+                Rotate(RotateDirection.Left);
+            }
+            else if (angle == 1)
+            {
+                Debug.Log("Rotate angle right");
+
+                Rotate(RotateDirection.Right);
+            }
         }
 
         if (!enemyInView && !underAttack)
@@ -119,7 +133,19 @@ public class SzilardAi : BaseAI
         timeSinceEnemyFound = Time.time - timeEnemyFound;
         
     }
+    public static float AngleDir(Vector3 fwd, Vector3 targetDir , Vector3 up ) {
+        Vector3 perp  = Vector3.Cross(fwd, targetDir);
+        float dir = Vector3.Dot(perp, up);
    
+        if (dir > 0.0) {
+            return 1.0f;
+        } else if (dir< 0.0) {
+            return -1.0f;
+        } else
+        {
+            return 0.0f;
+        }
+    }
     private void RoamFlag()
     {
         MoveForward();
