@@ -40,7 +40,7 @@ public class StanimirAI : BaseAI
     public StanimirAI()
     {
         name = "Stanimir's Ai";
-        
+
     }
 
 
@@ -49,22 +49,22 @@ public class StanimirAI : BaseAI
         if (DoOnce == false)
         {
             DoOnce = true;
-          
+
             Obstacle = GameObject.FindObjectsOfType(typeof(Obstacle)) as Obstacle[];
             self = GameObject.Find(name);
-           
+
         }
         if (self != null)
         {
 
             foreach (var detector in Obstacle)
             {
-                distance = 1 / Vector3.Distance(detector.transform.position, self.transform.position);
-                if (distance > .1f&&self!=null)
+                distance = 1 / Vector3.Distance(detector.transform.position, GetPosition());
+                if (distance > .1f && self != null)
                 {
                     Debug.Log(detector.name);
 
-                    force = (self.transform.position - detector.transform.position).normalized;
+                    force = (GetPosition() - detector.transform.position).normalized;
 
 
 
@@ -73,7 +73,7 @@ public class StanimirAI : BaseAI
                     force *= detector.Force;
 
                     velocity = (velocity + force).normalized;
-                   // self.transform.Translate(velocity * Speed * Time.deltaTime);
+                    GetTransfrom().transform.Translate(velocity * Speed * Time.deltaTime);
                 }
             }
         }
@@ -134,7 +134,7 @@ public class StanimirAI : BaseAI
 
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
-       
+
         if (radar.ContainsKey(info.name))
         {
             radar[info.name] = info;
