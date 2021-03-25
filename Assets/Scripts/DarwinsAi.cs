@@ -22,6 +22,18 @@ public class DarwinsAi : BaseAI
     private GameObject FlagTransform = new GameObject();
     private bool gotFlagTranform = false;
 
+    [SerializeField]
+    float Speed = 1;
+    Vector3 force;
+    float distance;
+
+    [SerializeField]
+    Transform Target = null;
+
+    public Obstacle[] Obstacle;
+
+    private Vector3 velocity = Vector3.zero;
+
     public DarwinsAi()
     {
         name = "Darwins Ai";
@@ -32,6 +44,8 @@ public class DarwinsAi : BaseAI
         if (!gotFlagTranform)
         {
             FlagTransform.transform.position = FlagPosition;
+            Obstacle = GameObject.FindObjectsOfType<Obstacle>();
+
             gotFlagTranform = true;
         }
 
@@ -77,7 +91,21 @@ public class DarwinsAi : BaseAI
             searchingForEnemy = false;            
         }
 
+        foreach (var detector in Obstacle)
+        {
+            distance = 1 / Vector3.Distance(detector.transform.position, GetPosition());
+            if (distance > .1f)
+            {
+                Debug.Log(detector.name);
 
+                force = (GetPosition() - detector.transform.position).normalized;
+                force *= distance;
+                force *= detector.Force;
+
+                velocity = (velocity + force).normalized;
+                GetTransfrom().Translate(velocity * Speed * Time.deltaTime);
+            }
+        }
 
     }
 
