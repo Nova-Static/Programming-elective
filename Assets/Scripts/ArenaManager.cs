@@ -46,7 +46,9 @@ public class ArenaManager : MonoBehaviour
         for (int i = 0; i < loopCount; i++)
         {
             Transform position = spawnPositions[i].transform;
-            MechController instance = Instantiate(Bot, position.position, Quaternion.identity);
+             Vector3 spawnPos = new Vector3(position.position.x + UnityEngine.Random.Range(-3, 10), position.position.y, position.position.z + UnityEngine.Random.Range(-3, 10));
+            
+            MechController instance = Instantiate(Bot, spawnPos, Quaternion.identity);
             instance.setAI(AIBots[i]);
             instance.name = AIBots[i].name;
             Bots[i] = instance;
