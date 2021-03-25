@@ -43,7 +43,8 @@ public class MechController : MonoBehaviour
 
     public CinemachineImpulseSource CISource;
 
-    private AudioSource audio;
+    private AudioSource sfx;
+    public AudioSource audio;
 
     public AudioClip moveAudio;
     public AudioClip shootAudio;
@@ -63,7 +64,7 @@ public class MechController : MonoBehaviour
     void Start()
     {
         //rendMesh = GetComponentInChildren<SkinnedMeshRenderer>();
-        audio = GetComponent<AudioSource>();
+        sfx = GetComponent<AudioSource>();
         healthbar.SetMaxHealth(Mathf.RoundToInt(Maxhealth));
         flag = GameObject.Find("Flag");
 
@@ -85,6 +86,7 @@ public class MechController : MonoBehaviour
 
     void Awake()
     {
+        audio.PlayOneShot(moveAudio, PlayerPrefs.GetFloat("Music", 0) / 10);
         // Make sure all Mechs have the same speed (independant from inspector values)
         MaxSpeed = 5;
         AngularSpeed = 50;
@@ -117,9 +119,9 @@ public class MechController : MonoBehaviour
     /// </summary>
     public void MoveForward()
     {
-        if (!audio.isPlaying)
+        if (!sfx.isPlaying)
         {
-            audio.PlayOneShot(moveAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
+            sfx.PlayOneShot(moveAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
         }
         //Vector3 newPosition = rigidbody.position + transform.forward * MaxSpeed * Time.deltaTime;
         Vector3 clampedPostion = Vector3.Max(Vector3.Min(transform.position, new Vector3(25, 0, 25)), new Vector3(-25, 0, -25));
@@ -162,7 +164,7 @@ public class MechController : MonoBehaviour
         if (timePerShot <= 0f)
         {
             timePerShot = 2f;
-            audio.PlayOneShot(shootAudio, PlayerPrefs.GetFloat("SFX", 0)/20);
+            GetComponent<AudioSource>().PlayOneShot(shootAudio, PlayerPrefs.GetFloat("SFX", 0)/20);
             GameObject newInstance =(GameObject) Instantiate(BulletPrefab, ShootOrigin.position, ShootOrigin.rotation);
             newInstance.GetComponent<CannonBall>().Seek2(_direction);
             CISource.GenerateImpulse();
@@ -219,7 +221,7 @@ public class MechController : MonoBehaviour
        
             
           
-            audio.PlayOneShot(explodeAudio, PlayerPrefs.GetFloat("SFX", 0) / 10);
+            sfx.PlayOneShot(explodeAudio, PlayerPrefs.GetFloat("SFX", 0) / 10);
             
         
     }
@@ -249,7 +251,7 @@ public class MechController : MonoBehaviour
     }
     private void Die()
     {
-        audio.PlayOneShot(deathAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
+        sfx.PlayOneShot(deathAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
         Destroy(gameObject);
     }
     private void FixedUpdate()

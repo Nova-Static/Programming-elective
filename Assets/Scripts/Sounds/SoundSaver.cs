@@ -30,12 +30,14 @@ public class SoundSaver : MonoBehaviour
                 break;
             case SelSound.Music:
                 slider.value = PlayerPrefs.GetFloat("Music", 0);
+          
                 break;
         }
     }
     private void Start()
     {
         soundChanged();
+       
     }
     // Start is called before the first frame update
     public void soundChanged()
