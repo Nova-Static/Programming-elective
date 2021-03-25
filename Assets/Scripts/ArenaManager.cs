@@ -42,7 +42,7 @@ public class ArenaManager : MonoBehaviour
         CheckConditions();
 
         int loopCount = Math.Min(spawnPositions.Length, AIBots.Length);
-
+        reshuffle(AIBots);
         for (int i = 0; i < loopCount; i++)
         {
             Transform position = spawnPositions[i].transform;
@@ -54,6 +54,19 @@ public class ArenaManager : MonoBehaviour
             Bots[i] = instance;
         }
     }
+
+    void reshuffle(BaseAI[] ais)
+    {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < ais.Length; t++)
+        {
+            BaseAI tmp = ais[t];
+            int r = UnityEngine.Random.Range(t, ais.Length);
+            ais[t] = ais[r];
+            ais[r] = tmp;
+        }
+    }
+
 
     private void CheckConditions()
     {

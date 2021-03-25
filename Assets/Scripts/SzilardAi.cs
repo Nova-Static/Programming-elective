@@ -65,7 +65,7 @@ public class SzilardAi : BaseAI
             MoveForward();
             Rotate(RotateDirection.Right);
         }
-        if (enemyInView)
+        if (enemyInView && !underAttack)
         {
             if (Vector3.Distance(GetPosition(), targetLastPos) > 8f)
             {
