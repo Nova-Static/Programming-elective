@@ -10,8 +10,9 @@ public class SzilardAi : BaseAI
     Vector3 MoveToPoint = Vector3.zero;
 
     string targetName = "Manno";
-    
-    
+
+    Vector3 targetPos;
+    bool obstacleInWay;
 
     [Header("In Combat")]
     float lastHealth;
@@ -46,6 +47,7 @@ public class SzilardAi : BaseAI
     }
     public override void Update()
     {
+    
         if (lastHealth != GetHealth())
         {
             lastHealth = GetHealth();
@@ -62,22 +64,21 @@ public class SzilardAi : BaseAI
         }
         if (underAttack && !enemyInView)
         {
-            MoveForward();
-            Rotate(RotateDirection.Right);
+            HandleMovement();
 
-            Rotate(RotateDirection.Right);
         }
         if (enemyInView && !underAttack)
         {
             if (Vector3.Distance(GetPosition(), targetLastPos) > 8f)
             {
-                MoveForward();
+                HandleMovement();
+
             }
-            RotateTo(targetLastPos - (GetPosition()));
+            RotateTo(targetLastPos - GetPosition());
         }
-        else if(enemyInView && underAttack)
+        else if (enemyInView && underAttack)
         {
-            MoveForward();
+            HandleMovement();
 
             float angle = AngleDir(GetForwardPos(), targetLastPos, GetTransfrom().up);
             if (angle == -1)
@@ -100,7 +101,7 @@ public class SzilardAi : BaseAI
             if (distanceToFlag >= 10f)
             {
                 GoBackToFlag();
-                
+
 
             }
             else
@@ -116,22 +117,51 @@ public class SzilardAi : BaseAI
             }
 
         }
-        foreach (var obstacle in Obstacles)
-        {
-            float d = 1 / Vector3.Distance(obstacle.transform.position, GetPosition());
-            if (d > .1f)
-            {
-                Vector3 force = (GetPosition() - obstacle.transform.position).normalized;
-                force *= d;
-                force *= obstacle.Force;
-                velocity = (velocity + force).normalized;
-                GetTransfrom().Translate(velocity * Time.deltaTime);
-            }
-        }
-
+        
         timeSinceLastHit = Time.time - lastHitTime;
         timeSinceEnemyFound = Time.time - timeEnemyFound;
         
+    }
+    private void HandleMovement()
+    {
+        obstacleInWay = false;
+        Vector3 fwd = GetTransfrom().TransformDirection(new Vector3(0f, 0f, 1f));
+        Vector3 right = GetTransfrom().TransformDirection(new Vector3(0.45f, 0f, 0));
+        Vector3 left = GetTransfrom().TransformDirection(new Vector3(-0.45f, 0f, 0));
+        Vector3 playerpos = new Vector3(GetTransfrom().position.x, GetTransfrom().position.y + 1f, GetTransfrom().position.z);
+        Debug.DrawRay(playerpos, right*10, Color.red);
+        Debug.DrawRay(playerpos, left * 10, Color.red);
+        Debug.DrawRay(playerpos, fwd * 10, Color.red);
+        RaycastHit hit;
+        if (Physics.Raycast(playerpos, fwd, out hit, 9))
+        {
+
+            if (hit.collider.gameObject.GetComponent<Obstacle>() != null)
+            {
+                obstacleInWay = true;
+                Rotate(RotateDirection.Right);
+            }
+        }
+        RaycastHit hit2;
+        if (Physics.Raycast(playerpos, right, out hit2, 9))
+        {
+            if (hit2.collider.gameObject.GetComponent<Obstacle>() != null)
+            {
+                obstacleInWay = true;
+                Rotate(RotateDirection.Left);
+            }
+        }
+        RaycastHit hit3;
+        if (Physics.Raycast(playerpos, left, out hit3, 9))
+        {
+            if (hit3.collider.gameObject.GetComponent<Obstacle>() != null)
+            {
+                obstacleInWay = true;
+                Rotate(RotateDirection.Right);
+            }
+        }
+
+        MoveForward();
     }
     public static float AngleDir(Vector3 fwd, Vector3 targetDir , Vector3 up ) {
         Vector3 perp  = Vector3.Cross(fwd, targetDir);
@@ -149,16 +179,25 @@ public class SzilardAi : BaseAI
     private void RoamFlag()
     {
         MoveForward();
-        Rotate(RotateDirection.Right);
-        Rotate(RotateDirection.Right);
+        if (!obstacleInWay)
+        {
+            Rotate(RotateDirection.Right);
+            Rotate(RotateDirection.Right);
+        }
     }
     private void GoBackToFlag()
     {
-        RotateTo(GetFlagPos() - (GetPosition()));
-        MoveForward();
+        if (!obstacleInWay)
+        {
+            RotateTo(GetFlagPos() - (GetPosition()));
+        }
+        //MoveForward();
+        //
+        HandleMovement();
     }
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
+        Fire(info.transform);
         if (underAttack)
         {
             enemyInView = true;
@@ -166,7 +205,7 @@ public class SzilardAi : BaseAI
         }
 
         //Seek(radar[info.name].position);
-        Fire(info.transform);
+       
 
         targetLastPos = info.position;
         timeEnemyFound = Time.time;

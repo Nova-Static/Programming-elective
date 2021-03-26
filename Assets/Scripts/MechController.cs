@@ -187,8 +187,8 @@ public class MechController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
        // transform.LookAt(targetDirection);
 
-        //Debug.Log("Rotating");
-        Debug.DrawRay(transform.position, targetDirection, Color.magenta, 1);
+        ////Debug.Log("Rotating");
+        //Debug.DrawRay(transform.position, targetDirection, Color.magenta, 1);
     }
 
     /// <summary>
