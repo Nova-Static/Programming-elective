@@ -88,7 +88,8 @@ public class MechController : MonoBehaviour
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
         teleporters = GameObject.FindGameObjectsWithTag("Teleport");
         mechNameUI = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        detector = transform.GetChild(4).gameObject.GetComponent<detecting>();
+        detector = transform.GetChild(5).gameObject.GetComponent<detecting>();
+        Debug.Log(detector.gameObject.name);
         mechNameUI.text = AI.name;
         AI.Start();
     }
