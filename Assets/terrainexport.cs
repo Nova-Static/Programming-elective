@@ -10,7 +10,7 @@ using System.Text;
 
 enum SaveFormat { Triangles, Quads }
 enum SaveResolution { Full = 0, Half, Quarter, Eighth, Sixteenth }
-
+#if UNITY_ENGINE
 class ExportTerrain : EditorWindow
 {
     SaveFormat saveFormat = SaveFormat.Triangles;
@@ -214,4 +214,6 @@ class ExportTerrain : EditorWindow
             EditorUtility.DisplayProgressBar("Saving...", "", Mathf.InverseLerp(0, totalCount, ++tCount));
         }
     }
-}
+
+    }
+#endif

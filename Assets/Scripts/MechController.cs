@@ -24,6 +24,8 @@ public class MechController : MonoBehaviour
     float MaxSpeed = 5;
 
     [SerializeField]
+    GameObject deadPrefab;
+    [SerializeField]
     float AngularSpeed = 50;
 
     public bool damaging;
@@ -252,6 +254,7 @@ public class MechController : MonoBehaviour
     private void Die()
     {
         sfx.PlayOneShot(deathAudio, PlayerPrefs.GetFloat("SFX", 0)/10);
+        Instantiate(deadPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     private void FixedUpdate()
