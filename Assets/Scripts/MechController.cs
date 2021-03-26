@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
 
 public enum RotateDirection
 {
@@ -54,6 +55,7 @@ public class MechController : MonoBehaviour
     public AudioClip deathAudio;
     private Animator animator;
     public Renderer rendMesh;
+    private TextMeshProUGUI mechNameUI;
     //Get the Renderer component from the new cube
 
 
@@ -83,6 +85,9 @@ public class MechController : MonoBehaviour
         
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
         teleporters = GameObject.FindGameObjectsWithTag("Teleport");
+        mechNameUI = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+       
+        mechNameUI.text = AI.name;
         AI.Start();
     }
 
@@ -247,6 +252,11 @@ public class MechController : MonoBehaviour
                 animator.SetBool("walking", false);
             }
             Accelleration.Set(0, 0, 0);
+            if (mechNameUI != null)
+            {
+                mechNameUI.gameObject.transform.LookAt(GameObject.Find("CM_Camera1").transform);
+                mechNameUI.rectTransform.rotation = new Quaternion(0, 180, 0, 0);
+            }
             AI.Update();
             CapturingFlag();
         }

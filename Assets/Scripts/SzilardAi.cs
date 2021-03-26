@@ -9,7 +9,6 @@ public class SzilardAi : BaseAI
     List<Vector3> telePos; 
     Vector3 MoveToPoint = Vector3.zero;
 
-    string targetName = "Manno";
 
     Vector3 targetPos;
     bool obstacleInWay;
@@ -43,6 +42,7 @@ public class SzilardAi : BaseAI
 
     public override void Start()
     {
+        lastHealth = GetHealth();
         Obstacles = GameObject.FindObjectsOfType<Obstacle>();
         aiStates = State.Roaming;
     }
@@ -186,7 +186,6 @@ public class SzilardAi : BaseAI
                 Rotate(RotateDirection.Right);
             }
         }
-
         MoveForward();
     }
     public static float AngleDir(Vector3 fwd, Vector3 targetDir , Vector3 up ) {
