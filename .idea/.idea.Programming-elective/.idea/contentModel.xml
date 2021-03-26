@@ -25,6 +25,28 @@
             <e p="VirtualInput.cs" t="Include" />
           </e>
         </e>
+        <e p="Mirza Beig" t="Include">
+          <e p="_DOCS" t="Include">
+            <e p="README - Inferno VFX.txt" t="Include" />
+          </e>
+          <e p="Particle Systems" t="Include">
+            <e p="_Common" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="_Demo" t="Include">
+                  <e p="DemoManager.cs" t="Include" />
+                  <e p="FPSDisplay.cs" t="Include" />
+                  <e p="FPSTest.cs" t="Include" />
+                  <e p="LoopingParticleSystemsManager.cs" t="Include" />
+                  <e p="MouseFollow.cs" t="Include" />
+                  <e p="OneshotParticleSystemsManager.cs" t="Include" />
+                  <e p="ParticleManager.cs" t="Include" />
+                </e>
+                <e p="AnimatedLight.cs" t="Include" />
+                <e p="CameraShake.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="ParticleSystems" t="Include">
           <e p="ParticleSystemsGuidelines.txt" t="Include" />
           <e p="Scripts" t="Include">
@@ -71,6 +93,7 @@
           <e p="LookoutCollider.cs" t="Include" />
           <e p="MechController.cs" t="Include" />
           <e p="mechGetter.cs" t="Include" />
+          <e p="Obstacle.cs" t="Include" />
           <e p="PondAI.cs" t="Include" />
           <e p="RamjarAI.cs" t="Include" />
           <e p="ShowHealthBar.cs" t="Include" />
@@ -80,6 +103,7 @@
             <e p="SoundSaver.cs" t="Include" />
           </e>
           <e p="SpawnPos.cs" t="Include" />
+          <e p="StanimirAI.cs" t="Include" />
           <e p="SzilardAi.cs" t="Include" />
           <e p="teleporterCooldown.cs" t="Include" />
           <e p="teleporterScript.cs" t="Include" />

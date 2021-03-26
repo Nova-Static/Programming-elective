@@ -23,7 +23,58 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Programming-elective/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Fire &amp; Explosion Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Fire &amp; Explosion Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Fire &amp; Explosion Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Fire &amp; Explosion Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Fire &amp; Explosion Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Goop Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Goop Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Goop Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Goop Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Goop Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Magic Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Misc Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Smoke &amp; Steam Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Water Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Weapon Effects.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectExamples/Weapon Effects.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Weapon Effects/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Weapon Effects/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectExamples/Weapon Effects/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Profiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RamjarAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RamjarAI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shared.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Environment.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shared/Environment.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Environment/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Environment/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Environment/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Environment/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Ramps.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shared/Ramps.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Ramps/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Ramps/Runtime.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shared/Sprites.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +95,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ShowHealthBar.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArenaManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DarwinsAi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SzilardAi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RamjarAI.cs" />
       </list>
@@ -93,7 +145,9 @@
       <workItem from="1615287784755" duration="5114000" />
       <workItem from="1615317232167" duration="1634000" />
       <workItem from="1615460868737" duration="92000" />
-      <workItem from="1616581461729" duration="11835000" />
+      <workItem from="1616581461729" duration="13646000" />
+      <workItem from="1616667195862" duration="7248000" />
+      <workItem from="1616749341048" duration="10390000" />
     </task>
     <servers />
   </component>
@@ -116,5 +170,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1616758616595">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1616758616595" />
   </component>
 </project>
