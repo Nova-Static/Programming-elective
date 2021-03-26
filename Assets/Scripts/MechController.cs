@@ -56,6 +56,8 @@ public class MechController : MonoBehaviour
     private Animator animator;
     public Renderer rendMesh;
     private TextMeshProUGUI mechNameUI;
+    public GameObject wallDetection;
+    private detecting detector;
     //Get the Renderer component from the new cube
 
 
@@ -86,7 +88,7 @@ public class MechController : MonoBehaviour
         CISource = this.gameObject.GetComponent<CinemachineImpulseSource>();
         teleporters = GameObject.FindGameObjectsWithTag("Teleport");
         mechNameUI = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-       
+        detector = transform.GetChild(4).gameObject.GetComponent<detecting>();
         mechNameUI.text = AI.name;
         AI.Start();
     }
@@ -239,6 +241,7 @@ public class MechController : MonoBehaviour
     {
         if (IsActive)
         {
+
             if (currentHealth <= 0)
             {
                 Die();
@@ -259,6 +262,21 @@ public class MechController : MonoBehaviour
             }
             AI.Update();
             CapturingFlag();
+            if (detector.detected)
+            {
+
+                WallDetection detected = new WallDetection();
+                detected.detecting = true;
+                detected.objectDetected = detector.detectedGameObject;
+                AI.StartDetection(detected);
+            }
+            else
+            {
+                WallDetection detected = new WallDetection();
+                detected.detecting = false;
+                detected.objectDetected = null;
+                AI.StartDetection(detected);
+            }
         }
     }
     private void Die()

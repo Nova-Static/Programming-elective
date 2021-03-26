@@ -155,9 +155,6 @@ public class SzilardAi : BaseAI
         Vector3 right = GetTransfrom().TransformDirection(new Vector3(0.45f, 0f, 0));
         Vector3 left = GetTransfrom().TransformDirection(new Vector3(-0.45f, 0f, 0));
         Vector3 playerpos = new Vector3(GetTransfrom().position.x, GetTransfrom().position.y + 1f, GetTransfrom().position.z);
-        Debug.DrawRay(playerpos, right*10, Color.red);
-        Debug.DrawRay(playerpos, left * 10, Color.red);
-        Debug.DrawRay(playerpos, fwd * 10, Color.red);
         RaycastHit hit;
         if (Physics.Raycast(playerpos, fwd, out hit, 9))
         {

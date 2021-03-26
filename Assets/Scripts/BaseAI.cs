@@ -8,6 +8,11 @@ public class RadarBlibInfo
     public Vector3 position;
     public Transform transform;
 }
+public class WallDetection
+{
+    public bool detecting;
+    public GameObject objectDetected;
+}
 public class TeleportersInfo
 {
     public Vector3 position;
@@ -42,15 +47,18 @@ public class BaseAI
     public virtual void OnRecordRadarBlib(RadarBlibInfo info)
     {
     }
+    public virtual void StartDetection(WallDetection detecting)
+    {
+    }
     public virtual void OnTeleportersInfo(TeleportersInfo info)
     {
     }
-    
+
     public virtual void OnFlagInfo(FlagInfo info)
     {
     }
     public virtual void OnFlagBeingCaptured(FlagBeingCaptured e)
-    {        
+    {
     }
 
     protected bool getCapturingState()
@@ -75,8 +83,8 @@ public class BaseAI
     {
         return Controller.transform.position;
     }
- 
-   
+
+
 
 
 
