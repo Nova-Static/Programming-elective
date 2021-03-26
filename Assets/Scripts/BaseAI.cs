@@ -76,10 +76,7 @@ public class BaseAI
         return Controller.transform.position;
     }
  
-    protected Transform GetTransfrom()
-    {
-        return Controller.transform;
-    }
+   
 
 
 
@@ -96,6 +93,10 @@ public class BaseAI
     {
         return Controller.transform.forward;
     }
+    protected Rigidbody GetRigidbody()
+    {
+        return Controller.GetComponent<Rigidbody>();
+    }
 
     protected Vector3 GetFlagPos()
     {
@@ -110,7 +111,10 @@ public class BaseAI
     {
         Controller.RotateTo(direction);
     }
-
+    protected Transform GetTransfrom()
+    {
+        return Controller.transform;
+    }
     protected void SetKinematic(bool isKinematic)
     {
         Controller.GetComponent<Rigidbody>().isKinematic = isKinematic;

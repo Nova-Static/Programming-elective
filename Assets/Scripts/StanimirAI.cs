@@ -22,7 +22,7 @@ public class StanimirAI : BaseAI
     private Dictionary<string, RadarBlibInfo> radar = new Dictionary<string, RadarBlibInfo>();
 
     private Vector3 FlagPosition;
-
+    LayerMask mask;
     private bool searchingForEnemy = false;
     private bool nearFlag = false;
 
@@ -35,8 +35,9 @@ public class StanimirAI : BaseAI
     private GameObject FlagTransform = new GameObject();
     private bool gotFlagTranform = false;
     public GameObject self;
-
+    Rigidbody rb;
     bool DoOnce;
+    bool capturing = false;
     public StanimirAI()
     {
         name = "Stanimir's Ai";
@@ -50,19 +51,22 @@ public class StanimirAI : BaseAI
         {
             DoOnce = true;
 
+            mask = LayerMask.GetMask("Obstacle");
             Obstacle = GameObject.FindObjectsOfType(typeof(Obstacle)) as Obstacle[];
-            self = GameObject.Find(name);
+         
+          //  rb = GetRigidbody();
 
         }
-        if (self != null)
+        if (rb.velocity.magnitude < 1&&getCapturingState()==false)
         {
-
-            foreach (var detector in Obstacle)
+            Rotate(RotateDirection.Right);
+        }
+        
+        foreach (var detector in Obstacle)
             {
                 distance = 1 / Vector3.Distance(detector.transform.position, GetPosition());
-                if (distance > .1f && self != null)
+                if (distance > .1f)
                 {
-                    Debug.Log(detector.name);
 
                     force = (GetPosition() - detector.transform.position).normalized;
 
@@ -75,63 +79,65 @@ public class StanimirAI : BaseAI
                     velocity = (velocity + force).normalized;
                     GetTransfrom().transform.Translate(velocity * Speed * Time.deltaTime);
                 }
-            }
-        }
-        if (!gotFlagTranform)
-        {
-            FlagTransform.transform.position = FlagPosition;
-            gotFlagTranform = true;
-        }
-
-
-        // Get distance to Flag
-        if (Vector3.Distance(GetPosition(), FlagPosition) < 5.0f) { nearFlag = true; }
-        else { nearFlag = false; }
-
-        // If not capturing and also not near the flag try getting to the flag
-        if (!getCapturingState() || !nearFlag)
-        {
-            if (!delayStart)
+               
+            
+            if (!gotFlagTranform)
             {
-                if (Vector3.Angle(GetForwardDirection(), FlagPosition - GetPosition()) > 5)
-                {
-                    RotateTo(FlagPosition - (GetPosition()));
-                }
-                else
-                {
-                    MoveForward();
-                }
+                FlagTransform.transform.position = FlagPosition;
+                gotFlagTranform = true;
             }
-        }
-        else if (!delayStart)
-        {
-            Rotate(RotateDirection.Left);
-        }
 
-        if (delayStart)
-        {
-            delaySearchEnemy -= Time.deltaTime;
-            if (LatestEnemyPos != null)
+            
+            // Get distance to Flag
+            if (Vector3.Distance(GetPosition(), FlagPosition) < 5.0f) { nearFlag = true; }
+            else { nearFlag = false; }
+
+            // If not capturing and also not near the flag try getting to the flag
+            if (!getCapturingState() || !nearFlag)
             {
-                RotateTo(LatestEnemyPos - GetPosition());
+                if (!delayStart)
+                {
+                    if (Vector3.Angle(GetForwardDirection(), FlagPosition - GetPosition()) > 5)
+                    {
+                        RotateTo(FlagPosition - (GetPosition()));
+                    }
+                    else
+                    {
+                        MoveForward();
+                    }
+                }
             }
+            else if (!delayStart)
+            {
+                Rotate(RotateDirection.Left);
+            }
+            
+            if (delayStart)
+            {
+                delaySearchEnemy -= Time.deltaTime;
+                if (LatestEnemyPos != null)
+                {
+                    RotateTo(LatestEnemyPos - GetPosition());
+                }
+            }
+
+            if (delaySearchEnemy <= 0.0f)
+            {
+              delayEnded();
+
+            }
+            else
+            {
+                searchingForEnemy = false;
+            }
+
+
+
         }
-
-        if (delaySearchEnemy <= 0.0f)
-        {
-            delayEnded();
-
-        }
-        else
-        {
-            searchingForEnemy = false;
-        }
-
-
-
     }
 
 
+  
     public override void OnRecordRadarBlib(RadarBlibInfo info)
     {
 
@@ -167,6 +173,7 @@ public class StanimirAI : BaseAI
 
         delaySearchEnemy = standardDelay;
         delayStart = false;
-    }
+   }
 
+   
 }
