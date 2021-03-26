@@ -35,7 +35,7 @@ public class SzilardAi : BaseAI
 
     Obstacle[] Obstacles;
     private Vector3 velocity = Vector3.zero;
-
+    State aiStates;
     public SzilardAi()
     {
         name = "Szilard Ai";
@@ -44,6 +44,7 @@ public class SzilardAi : BaseAI
     public override void Start()
     {
         Obstacles = GameObject.FindObjectsOfType<Obstacle>();
+        aiStates = State.Roaming;
     }
     public override void Update()
     {
@@ -62,65 +63,90 @@ public class SzilardAi : BaseAI
         {
             enemyInView = false;
         }
+
+        switch (aiStates)
+        {
+            case State.Attacked:
+                HandleMovement();
+                break;
+            case State.Pursuing:
+                PurseHandler();
+                break;
+            case State.InCombat:
+                inCombatHandler();
+                break;
+            case State.Roaming:
+                roamHandler();
+                break;
+        }
+
         if (underAttack && !enemyInView)
         {
-            HandleMovement();
+            aiStates = State.Attacked;
 
         }
-        if (enemyInView && !underAttack)
+        else if (enemyInView && !underAttack)
         {
-            if (Vector3.Distance(GetPosition(), targetLastPos) > 8f)
-            {
-                HandleMovement();
-
-            }
-            RotateTo(targetLastPos - GetPosition());
+            aiStates = State.Pursuing;
         }
         else if (enemyInView && underAttack)
         {
-            HandleMovement();
+            aiStates = State.InCombat;
 
-            float angle = AngleDir(GetForwardPos(), targetLastPos, GetTransfrom().up);
-            if (angle == -1)
-            {
-                Debug.Log("Rotate angle left");
-                Rotate(RotateDirection.Left);
-            }
-            else if (angle == 1)
-            {
-                Debug.Log("Rotate angle right");
-
-                Rotate(RotateDirection.Right);
-            }
         }
-
-        if (!enemyInView && !underAttack)
+        else if (!enemyInView && !underAttack)
         {
-            distanceToFlag = Vector3.Distance(GetPosition(), GetFlagPos());
-
-            if (distanceToFlag >= 10f)
-            {
-                GoBackToFlag();
-
-
-            }
-            else
-            {
-                if (distanceToFlag <= 40f && distanceToFlag >= 3f && !getCapturingState())
-                {
-                    RoamFlag();
-                }
-            }
-            if (getCapturingState() && distanceToFlag >= 5f)
-            {
-                GoBackToFlag();
-            }
-
+            aiStates = State.Roaming;
         }
         
         timeSinceLastHit = Time.time - lastHitTime;
         timeSinceEnemyFound = Time.time - timeEnemyFound;
         
+    }
+    private void PurseHandler()
+    {
+        if (Vector3.Distance(GetPosition(), targetLastPos) > 8f)
+        {
+            HandleMovement();
+
+        }
+        RotateTo(targetLastPos - GetPosition());
+    }
+    private void roamHandler()
+    {
+        distanceToFlag = Vector3.Distance(GetPosition(), GetFlagPos());
+
+        if (distanceToFlag >= 10f)
+        {
+            GoBackToFlag();
+
+
+        }
+        else
+        {
+            if (distanceToFlag <= 40f && distanceToFlag >= 3f && !getCapturingState())
+            {
+                RoamFlag();
+            }
+        }
+        if (getCapturingState() && distanceToFlag >= 5f)
+        {
+            GoBackToFlag();
+        }
+    }
+    private void inCombatHandler()
+    {
+        HandleMovement();
+
+        float angle = AngleDir(GetForwardPos(), targetLastPos, GetTransfrom().up);
+        if (angle == -1)
+        {
+            Rotate(RotateDirection.Left);
+        }
+        else if (angle == 1)
+        {
+            Rotate(RotateDirection.Right);
+        }
     }
     private void HandleMovement()
     {
@@ -238,5 +264,14 @@ public class SzilardAi : BaseAI
             }
         }
         return locOfClosestPos;
+    }
+    enum State
+    {
+        
+        Attacked,
+        Pursuing,
+        InCombat,
+        Roaming
+
     }
 }
